@@ -1,0 +1,152 @@
+@import 'core/colors';
+
+.screen-view {
+    width: 360px;
+    height: 740px;
+    background-color: rgb(239, 239, 239);
+    border: 1px solid #333;
+}
+
+.frame {
+    padding: 20px 20px;
+}
+
+.main-menu {
+    position: fixed;
+    bottom: 10px;
+    left: 2.5%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    flex-wrap: nowrap;
+    width: 95%;
+    height: 60px;
+    backdrop-filter: blur(5px);
+    background: $black_12;
+    border-radius: 50px;
+
+    .side {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 60px;
+        padding: 5px;
+
+        &.left {
+            flex-direction: row;
+            .item {
+                flex-direction: row;
+            }
+        }
+        &.right {
+            flex-direction: row-reverse;
+        }
+        &.center {
+            background: $black_22;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            padding: 0;
+
+            .button {
+                width: 65px;
+                height: 65px;
+                svg {
+                    width: 100%;
+                }
+            }
+        }
+
+        .button {
+            margin: 0;
+        }
+    }
+
+    .item {
+        display: flex;
+        align-items: center;
+        flex-direction: inherit;
+        svg {
+            height: auto;
+        }
+
+        span {
+            font-size: 15px;
+            margin: 0 10px;
+        }
+    }
+}
+
+.pendingList {
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 10px;
+    position: absolute;
+    margin-left: 18%;
+}
+
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    .popup-overlay {
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(2px);
+            position: absolute;
+            width: inherit;
+            height: inherit;
+    }
+    .popup-body {
+        background: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(4px);
+        padding: 40px;
+        position: fixed;
+        width: 100%;
+        bottom: 1px;
+    }
+}
+
+.title {
+
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    
+}
+
+h1 {
+    font-size: 50px;
+}
+
+h2 {
+    font-size: 30px;
+}
+
+h3 {
+    font-size: 25px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+h5 {
+    font-size: 18px;
+}
+
+h6 {
+    font-size: 16px;
+}
+
+.container-view {
+    .section {
+        display: flex;
+    }
+}
