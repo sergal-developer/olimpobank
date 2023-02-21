@@ -5,6 +5,13 @@ import { CONTEXTNAME } from "./contextNames";
 export class GlobalConstants {
     context = '';
     mainContext = CONTEXTNAME.GLOBAL;
+    currentUser: any = null;
 
     constructor() {}
+
+    reset() {
+        this.context = '';
+        this.mainContext = CONTEXTNAME.GLOBAL;
+        this.currentUser = null;
+    }
 }

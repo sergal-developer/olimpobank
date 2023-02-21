@@ -1,14 +1,14 @@
 <div class="screen-view">
-  <form class="needs-validation view-container">
+  <div class="needs-validation view-container" id="login">
     <div class="row g-3">
 
       <div class="col-12">
-        <label for="username" class="form-label">Usuario / Cliente</label>
+        <label for="user" class="form-label">Usuario / Cliente</label>
 
         <div class="input-group has-validation">
-          <input type="text" class="form-control" id="username" required="">
+          <input type="text" class="form-control" id="user" required="">
           <div class="invalid-feedback">
-            Your username is required.
+            Your user is required.
           </div>
         </div>
       </div>
@@ -16,25 +16,29 @@
       <div class="col-12">
         <label for="password" class="form-label">Constraseña</label>
 
-        <input type="password" class="form-control" id="password">
+        <input type="password" class="form-control" id="password" required="">
         <div class="invalid-feedback">
           Please enter a valid email address for shipping updates.
         </div>
       </div>
 
-      <div class="col-12">
-        <span>No recuerdo mi contraseña</span>
+      <div class="col-12" *ngIf="responseMessage">
+        <span>{{ responseMessage }}</span>
       </div>
 
       <div class="col-12">
-        <button class="btn btn-primary btn-lg" type="submit">Acceder</button>
+        <span><button class="link" (click)="gotoReset()">No recuerdo mi contraseña</button></span>
       </div>
 
       <div class="col-12">
-        <span>¿Eres nuevo por aqui?, Registrate</span>
+        <button class="btn btn-primary btn-lg" (click)="login()">Acceder</button>
+      </div>
+
+      <div class="col-12">
+        <span>¿Eres nuevo por aqui?, <button class="link" (click)="gotoRegister()">Registrate</button> </span>
       </div>
 
     </div>
-  </form>
+  </div>
 
 </div>

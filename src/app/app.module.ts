@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './common/components/components.module';
 import { GlobalConstants } from './common/globals/globalConstants';
 import { ViewsModule } from './views/views.module';
+import { OlimpoService } from './common/services/olimpoServices';
+import { OlimpoCore } from './common/services/olimpoCore';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,8 @@ import { ViewsModule } from './views/views.module';
   ],
   providers: [
     GlobalConstants,
-    CurrencyPipe,
-    DatePipe
+    OlimpoCore,
+    OlimpoService
   ],
   bootstrap: [AppComponent]
 })

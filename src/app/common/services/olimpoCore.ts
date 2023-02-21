@@ -1,6 +1,10 @@
+import { Injectable } from "@angular/core";
 import { Storage } from "src/app/database/session.storage";
 import { GlobalConstants } from "../globals/globalConstants";
 
+@Injectable({
+    providedIn: 'root'
+})
 export class OlimpoCore {
     dataName = "DATA";
     db = new Storage();
@@ -48,7 +52,7 @@ export class OlimpoCore {
             return null;
         }
         try {
-            storage[container] = storage[container] || {};
+            storage[container] = storage[container] || [];
             return storage[container].filter((x: any) => { return x[keySearch] === id })[0];
         }
         catch (err) {
@@ -161,6 +165,49 @@ export class OlimpoCore {
     }
     //#endregion ENV
 
+    //#region USERSREGISTRED
+    tableClient = "CLIENTS";
+
+    getClients() {
+        const data = this.getStorage(this.tableClient);
+        return data || null;
+    }
+
+    searchClient(credentials: any) {
+        const client = this.searchTable(credentials, this.tableClient, 'clients', 'client');
+        const email = this.searchTable(credentials, this.tableClient, 'clients', 'email');
+        if (client || email) {
+            return client || email;
+        } else {
+            return null;
+        }
+    }
+
+    createClient(name: string, lastName: string, email: string, password: string) {
+        const table = this.getClients();
+        const user = {
+                id: this.uuidv4(),
+                client: this.createPattern('xxxxxxx'),
+                name: name,
+                lastName: lastName,
+                email: email,
+                password: password,
+                active: true,
+        };
+
+        if(!table.clients || !table.clients.length) {
+            table.clients = [];
+        }
+
+        table.clients.push(user);
+        return this.createTable(table, this.tableClient);
+    }
+
+    updateClient(user: any) {
+        return this.searchUpdateTable(user, this.tableClient, 'clients', 'id');
+    }
+    //#endregion USERS
+
     //#region USERS
     tableUser = "USER";
 
@@ -188,6 +235,7 @@ export class OlimpoCore {
         return this.updateTable(user, this.tableUser, 'user');
     }
     //#endregion USERS
+
 
     //#region PROFILE
     tableProfile = "PROFILE";

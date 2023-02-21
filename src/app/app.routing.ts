@@ -5,6 +5,7 @@ import { CardDetailsComponent } from './views/cardDetails/cardDetails.component'
 import { CardRequestComponent } from './views/cardRequest/cardRequest.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { HelpComponent } from './views/help/help.component';
+import { LegalComponent } from './views/legal/legal.component';
 import { LoginComponent } from './views/login/login.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
 import { ProfileComponent } from './views/profile/profile.component';
@@ -26,6 +27,8 @@ const routes: Routes = [
   { path: 'request', component: CardRequestComponent },
   { path: 'card', component: CardDetailsComponent },
   { path: 'transfer', component: BankTransferComponent },
+  { path: 'legal', component: LegalComponent },
+  { path: 'legal/:module', component: LegalComponent },
 ];
 
 @NgModule({

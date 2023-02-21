@@ -1,20 +1,18 @@
-<div class="screen-view">
-  <form class="needs-validation view-container">
+<div class="screen-view" *ngIf="client">
+  <div class="needs-validation view-container" id="resetPassword">
     <div class="row g-3">
 
       <div class="col-12">
-        <label for="username" class="form-label">Correo electronico</label>
-        <div >
-            Sergio Antonio Gallegos Alvarado
-        </div>
+        <h3>{{ client.name }} {{ client.lastName }}</h3>
+        <h4><b>({{ client.client }})</b></h4>
+        <h4>{{ client.email }}</h4>
       </div>
-      
-     
+
       <div class="col-12">
-        <label for="text" class="form-label">Constraseña</label>
-        <input type="text" class="form-control" id="password" placeholder="contraseña">
+        <label for="password" class="form-label">Constraseña</label>
+        <input type="text" class="form-control" id="password" required="">
         <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
+          Esta campo debe de estar lleno
         </div>
       </div>
 
@@ -24,15 +22,41 @@
       </div>
 
       <div class="col-12">
-        <label for="text" class="form-label">Confirmar Constraseña</label>
-        <input type="text" class="form-control" id="password" placeholder="contraseña">
+        <label for="passwordConfirmation" class="form-label">Confirmar Constraseña</label>
+        <input type="text" class="form-control" id="passwordConfirmation" required="">
         <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
+          Esta campo debe de estar lleno
         </div>
       </div>
 
     </div>
     <hr class="my-4">
-    <button class="btn btn-primary btn-lg" type="submit">Actualizar</button>
-  </form> 
+    <button class="btn btn-primary btn-lg" (click)="updatePassword()">Actualizar</button>
+  </div> 
+</div>
+
+<div class="screen-view" *ngIf="!client">
+  <div class="needs-validation view-container" id="restore">
+    <div class="row g-3">
+
+      <div class="col-12">
+        <label for="user" class="form-label">Usuario / Cuenta</label>
+        <input type="text" class="form-control" id="user" required="">
+      </div>
+
+      <div class="col-12" *ngIf="responseMessage">
+        <span>{{ responseMessage }}</span>
+      </div>
+
+    </div>
+    <hr class="my-4">
+    <button class="btn btn-primary btn-lg" (click)="restore()">Recuperar</button>
+  </div> 
+</div>
+
+
+<div class="popup" *ngIf="updatedPassword">
+  El usuario se a actualizado con exito!!
+
+  <button class="btn btn-primary btn-lg" (click)="login()">Login</button>
 </div>

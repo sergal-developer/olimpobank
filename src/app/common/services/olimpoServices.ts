@@ -1,7 +1,9 @@
-import { Storage } from "src/app/database/session.storage";
-import { GlobalConstants } from "../globals/globalConstants";
+import { Injectable } from "@angular/core";
 import { OlimpoCore } from "./olimpoCore";
 
+@Injectable({
+    providedIn: 'root'
+})
 export class OlimpoService {
 
     constructor(private oc: OlimpoCore) { }
@@ -29,6 +31,41 @@ export class OlimpoService {
             { id: 34, name: "AMEX", description: "American Express" },
         ];
     }
+
+    loginClient(credentials: any) {
+        const user = this.searchClient(credentials);
+        if (!user) { return null; }
+
+        if (user.password === credentials.password) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    searchClient(client: any) {
+        return this.oc.searchClient(client);
+    }
+
+    registerClient(client: any) {
+        const user = this.searchClient(client);
+        if (!user) {
+            this.oc.createClient(client.name, client.lastName, client.email, client.password);
+            return this.searchClient(client);
+        } else {
+            return null; 
+        }
+    }
+
+    updateClient(client: any) {
+        const user = this.searchClient(client);
+        if (user) {
+            this.oc.updateClient(client);
+            return this.searchClient(client);
+        } else {
+            return null; 
+        }
+    }
     //#endregion ENV
 
     //#region USERS
@@ -41,5 +78,15 @@ export class OlimpoService {
         //#region TRANSACTIONS
         //#endregion TRANSACTIONS
     //#endregion CARDS
+
+    //#region CONVERTERS
+    encode(str: string) {
+        return btoa(str);
+    }
+
+    decode(str: string) {
+        return atob(str);
+    }
+    //#endregion CONVERTERS
 
 }
