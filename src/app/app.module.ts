@@ -6,9 +6,9 @@ import { AppComponent } from './app.component';
 
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DashboardModule } from './views/dashboard/dashboard.module';
 import { ComponentsModule } from './common/components/components.module';
 import { GlobalConstants } from './common/globals/globalConstants';
+import { ViewsModule } from './views/views.module';
 
 @NgModule({
   declarations: [
@@ -21,9 +21,8 @@ import { GlobalConstants } from './common/globals/globalConstants';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
-    DashboardModule,
     ComponentsModule,
+    ViewsModule
   ],
   providers: [
     GlobalConstants,

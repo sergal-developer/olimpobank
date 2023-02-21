@@ -1,79 +1,79 @@
-<div class="container-view">
-    <div class="section header">
-        <div class="avatar">
-            <div class="icon"></div> <div class="name">Sergio Gallegos</div>
-        </div>
+<div class="screen-view">
+    
+    <div class="header">
+      <div class="return"> r </div>
+      <div class="user">Hola, Sergio</div>
+      <div class="title">Titulo</div>
+      <div class="options">op</div>
     </div>
-
-    <div class="section title">
-        <h1>Resumen</h1>
-
-        <h6 (click)="openDate()">
-            <div>Filtro aplicado: {{ monthsSelected }}</div>
-        </h6>
-    </div>
-
-    <div class="section balance">
-        <div class="tile">
-            <h4>Balance</h4>
-            <h2>{{ balanceTotal }}</h2>
-        </div>
-    </div>
-
-    <div class="section stadistics">
-        <div class="stadistics">
-            <div class="resume">
-                <div class="stadistic">
-                    <div>{{ budgetTotal }}</div>
-                    <span>Gastos</span>
-                </div>
-        
-                <div class="stadistic">
-                    <div>{{ entryTotal }}</div>
-                    <span>Ingresos</span>
-                </div>
+  
+    <div class="content">
+      <div class="accounts">
+        <div class="accountsTitle">Cuentas en Efectivo</div>
+  
+        <div class="accountsList">
+          <div class="accountRequest">
+            Solicitar tarjeta
+          </div>
+  
+          <div class="accountCard">
+            <div class="card-small">
+              <div class="card-header">
+                <div class="card name">**** 9870</div>
+                <div class="card status">Activa</div>
+              </div>
+              <div class="card-content">
+                <div class="card balance">$ 18,000.000 MXN</div>
+              </div>
             </div>
-            <div>
-                
+          </div>
+  
+          <div class="accountCard">
+            <div class="card-small">
+              <div class="card-header">
+                <div class="card name">**** 9870</div>
+                <div class="card status">Activa</div>
+              </div>
+              <div class="card-content">
+                <div class="card balance">$ 18,000.000 MXN</div>
+              </div>
             </div>
-            
+          </div>
         </div>
-    </div>
-
-    <div class="section transactions">
-        <div class="actions">
-            <div class="item">Transacciones</div>
-        </div>
-
-        <div class="records">
-            <ng-container *ngIf="listBudgets">
-                <!-- <list-component
-                    [list]="listBudgets"
-                    (actionEvent)="onAfterAction($event)"
-                ></list-component> -->
-            </ng-container>
-        </div>
-    </div>
-</div>
-
-<panel-component [title]="modal.title" [(open)]="modal.showModal" [size]="modal.size" [showClose]="modal.showClose"
-    (afterChange)="onAfterAction($event)">
-    <div body>
-        <div class="datepicker">
-
-            <label for="start">
-                <input type="date" id="start" name="start" tabindex="3" [(ngModel)]="startDateFormat">
-            </label>
-
-            <label for="end" *ngIf="startDateFormat">
-                <input type="date" id="end" name="end" tabindex="3" [(ngModel)]="endDateFormat">
-            </label>
-
-            <div>
-                <button (click)="modal.showModal = false">Cancel</button>
-                <button (click)="updateRange()" [disabled]="!(startDateFormat && endDateFormat)">Apply</button>
+      </div>
+  
+      <div class="accounts">
+        <div class="accountsTitle">Cuentas de Credito</div>
+  
+        <div class="accountsList">
+          <div class="accountRequest">
+            Solicitar tarjeta
+          </div>
+  
+          <div class="accountCard">
+            <div class="card-small">
+              <div class="card-header">
+                <div class="card name">**** 9870</div>
+                <div class="card status">Activa</div>
+              </div>
+              <div class="card-content">
+                <div class="card balance">$ 18,000.000 MXN</div>
+              </div>
             </div>
-
+          </div>
+  
+          <div class="accountCard">
+            <div class="card-small">
+              <div class="card-header">
+                <div class="card name">**** 9870</div>
+                <div class="card status">Activa</div>
+              </div>
+              <div class="card-content">
+                <div class="card balance">$ 18,000.000 MXN</div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-</panel-component>
+  </div>
