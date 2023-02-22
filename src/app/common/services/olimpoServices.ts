@@ -126,6 +126,7 @@ export class OlimpoService {
                 description: card.description,
                 currency: user.profile.currency,
                 owner: `${user.name} ${user.lastName}`,
+                ownerId: user.id,
                 type: card.type,
                 commission: card.commission,
                 annuity: card.annuity,
@@ -164,6 +165,37 @@ export class OlimpoService {
         return this.oc.getCard({ id: cardId });
     }
     //#region TRANSACTIONS
+    transaction(transaction: any, card: any, client: any) {
+        let user = this.getProfile(client);
+
+        return this.oc.createTransaction(transaction, card.id, user);
+    }
+
+    validateTransactions() {
+        const cards = this.oc.getCards();
+        console.log('cards: ', cards.content);
+        const transactions: any = [];
+        cards.content.forEach((card: any) => {
+            card.transactions.forEach((tra: any) => {
+                if (tra.status !== 'PENDING') { return; }
+                transactions.push(tra);
+            });
+        });
+
+        transactions.forEach((tra: any) => {
+            const valid = cards.content.find((x: any) => {
+                return x.cardNumber === tra.receptor || x.CLABE === tra.receptor
+            });
+            if (valid) {
+                tra.income = !tra.income;
+                tra.status = 'COMPLETED';
+                return this.oc.createBatchTransaction(tra);
+            }
+
+        });
+
+        console.log('transactions: ', transactions);
+    }
     //#endregion TRANSACTIONS
     //#endregion CARDS
 

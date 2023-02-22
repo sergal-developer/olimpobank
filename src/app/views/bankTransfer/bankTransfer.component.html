@@ -30,7 +30,7 @@
 
         <div class="col-12">
           <label for="amount" class="form-label">¿Cuánto quieres enviar?</label>
-          <input type="number" class="form-control" id="amount" placeholder="0">
+          <input type="number" class="form-control" id="amount" placeholder="0" required="">
           <div class="invalid-feedback">
             Please enter a valid text address for shipping updates.
           </div>
@@ -38,13 +38,17 @@
   
         <div class="col-12">
           <label for="concept" class="form-label">Concepto</label>
-          <input type="text" class="form-control" id="concept" placeholder="detalles">
+          <input type="text" class="form-control" id="concept" placeholder="detalles" >
           <div class="invalid-feedback">
             Please enter a valid text address for shipping updates.
           </div>
         </div>
-      </div>
-    
+
+        <div class="col-12" *ngIf="responseMessage">
+          <span>{{ responseMessage }}</span>
+        </div>
+        
+
       <hr class="my-4">
   
       <button class="btn btn-primary btn-lg" (click)="send()">Enviar</button>

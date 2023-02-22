@@ -250,10 +250,6 @@ export class OlimpoCore {
         }
         return this.createTable(data, this.tableProfile);
     }
-
-    updateProfile(data: any) {
-        return this.updateTable(data, this.tableProfile, 'content');
-    }
     //#endregion PROFILE
 
     //#region CARDS
@@ -263,8 +259,8 @@ export class OlimpoCore {
         return data || null;
     }
 
-    getCard(data: any) {
-        return this.searchTable(data, this.tableCard, 'content', 'id');
+    getCard(data: any, keySearch = 'id') {
+        return this.searchTable(data, this.tableCard, 'content', keySearch);
     }
 
     createCard(data: any) {
@@ -286,6 +282,7 @@ export class OlimpoCore {
             expirationYear: this.createPattern('202x'),
             cvc: this.createPattern('xxx'),
             owner: data.owner,
+            ownerId: data.ownerId,
             type: data.type,
             commission: data.commission,
             annuity: data.annuity,
@@ -300,43 +297,93 @@ export class OlimpoCore {
     }
 
     updateCard(data: any) {
-        return this.searchUpdateTable(data, this.tableCard, 'content', 'id');
+        this.searchUpdateTable(data, this.tableCard, 'content', 'id');
+        return this.getCard(data);
     }
 
     //#region TRANSACTIONS
-    createTransaction(data: any, idcard: string) {
-        const transaction = {
+    createTransaction(data: any, idcard: string, client: any ) {
+        const transaction  = {
             id: this.uuidv4(),
             amount: data.amount,
             currency: data.currency,
             date: new Date().getTime(),
             source: data.source,
             income: data.income,
-            emiter: data.emiter,
-            receptor: data.receptor
+            issuing: data.issuing,
+            receptor: data.receptor,
+            status: data.status,
+            concept: data.concept
         }
-
         // update data 
         const card = this.getCard({ id: idcard });
         if (!card) {
             console.log('no exist data in card')
         }
 
+        card.balance = parseInt(card.balance, 10);
         // update balance
         if (data.income) {
             card.transactions.push(transaction);
-            card.balance += data.amount;
+            card.balance += parseInt(data.amount, 10);
             console.log('card.balance ', card.balance)
         } else {
-            const diference = card.balance - data.amount;
-            console.log('diference', diference)
+            const diference = card.balance - parseInt(data.amount, 10);
             if (diference >= 0) {
                 card.balance = diference;
                 card.transactions.push(transaction);
             }
         }
 
-        return this.updateCard(card);
+        const linkCard = client.profile.accounts[card.type].filter((x: any) => x.id === card.id);
+        let cardUpdated = null;
+        if (linkCard.length) {
+            linkCard[0].balance = card.balance;
+
+            console.log('linkCard: ', linkCard);
+            console.log('card: ', card);
+            cardUpdated = this.updateCard(card);
+            const profile = this.updateClient(client);
+            console.log('profile: ', profile);
+        }
+        return cardUpdated;
+    }
+
+    createBatchTransaction(transaction: any) {
+        // update data 
+        let card = this.getCard({ cardNumber: transaction.receptor }, 'cardNumber');
+            card = card || this.getCard({ CLABE: transaction.receptor }, 'CLABE');
+        if (!card) {
+            console.log('no exist data in card')
+        }
+
+        card.balance = parseInt(card.balance, 10);
+        // update balance
+        if (transaction.income) {
+            card.transactions.push(transaction);
+            card.balance += parseInt(transaction.amount, 10);
+            console.log('card.balance ', card.balance)
+        } else {
+            const diference = card.balance - parseInt(transaction.amount, 10);
+            if (diference >= 0) {
+                card.balance = diference;
+                card.transactions.push(transaction);
+            }
+        }
+
+        console.log('card: ', card);
+        // const linkCard = client.profile.accounts[card.type].filter((x: any) => x.id === card.id);
+        // let cardUpdated = null;
+        // if (linkCard.length) {
+        //     linkCard[0].balance = card.balance;
+
+        //     console.log('linkCard: ', linkCard);
+        //     console.log('card: ', card);
+        //     cardUpdated = this.updateCard(card);
+        //     const profile = this.updateClient(client);
+        //     console.log('profile: ', profile);
+        // }
+        // return cardUpdated;
     }
     //#endregion TRANSACTIONS
     //#endregion CARDS

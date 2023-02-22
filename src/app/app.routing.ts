@@ -5,6 +5,7 @@ import { CardDetailsComponent } from './views/cardDetails/cardDetails.component'
 import { CardRequestComponent } from './views/cardRequest/cardRequest.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { HelpComponent } from './views/help/help.component';
+import { InternalComponent } from './views/internal/internal.component';
 import { LegalComponent } from './views/legal/legal.component';
 import { LoginComponent } from './views/login/login.component';
 import { NotificationsComponent } from './views/notifications/notifications.component';
@@ -26,8 +27,10 @@ const routes: Routes = [
   { path: 'help', component: HelpComponent },
   { path: 'request/:type', component: CardRequestComponent },
   { path: 'card/:id', component: CardDetailsComponent },
-  { path: 'card/:id/transfer', component: BankTransferComponent },
+  { path: 'card/:id/:operation', component: BankTransferComponent },
   { path: 'legal/:module', component: LegalComponent },
+
+  { path: 'internal', component: InternalComponent },
 ];
 
 @NgModule({

@@ -12,7 +12,9 @@ export class BankTransferComponent implements OnInit {
 
   cardId: any = null;
   card: any = null;
+  profile: any = null;
   responseMessage: string = '';
+  operation: string = '';
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -25,6 +27,7 @@ export class BankTransferComponent implements OnInit {
       console.log('params: ', params);
       if (params.id) {
         this.cardId = params.id;
+        this.operation = params.operation;
         this.getCard(this.cardId);
       }
     });
@@ -32,23 +35,37 @@ export class BankTransferComponent implements OnInit {
 
   getCard(cardId: string) {
     this.card = this.service.getCardDetails(cardId);
-    console.log('this.cards: ', this.card);
+    this.profile = this.service.getProfile(this.gc.currentUser);
   }
 
   send() {
     this.responseMessage = '';
     const inputs = document.querySelectorAll('#transfer input');
-    const transfer: any = {}
+    const transaction: any = {}
     const invalidFields = [];
 
     inputs.forEach((input: any) => {
       if (input.required && !input.value) {
         invalidFields.push(input);
       }
-        transfer[input.id] = input.value;
+        transaction[input.id] = input.value;
     });
 
-    console.log('transfer: ', transfer);
+    if (invalidFields.length) {
+      this.responseMessage = `debe de llenar los campos requeridos`;
+      return;
+    }
+
+    transaction.currency = this.card.currency;
+    transaction.source = 'APP';
+    transaction.income = this.operation === 'transfer' ? false : true;
+    transaction.issuing = this.card.CLABE;
+    transaction.receptor = transaction.account;
+    transaction.status = 'PENDING';
+    console.log('transaction: ', transaction);
+
+    const tra = this.service.transaction(transaction, this.card, this.gc.currentUser);
+    console.log('tra: ', tra);
 
   }
 

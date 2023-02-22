@@ -39,4 +39,8 @@ export class CardDetailsComponent implements OnInit {
     this.router.navigate(['/card', this.card.id, 'transfer']);
   }
 
+  payments() {
+    this.router.navigate(['/card', this.card.id, 'pay']);
+  }
+
 }
