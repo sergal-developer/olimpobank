@@ -45,3 +45,78 @@ h5 {
 h6 {
     font-size: 16px;
 }
+
+
+.header {
+    height: 75px;
+    margin: -30px -30px 30px -30px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    font-size: 12pt;
+
+    .return {
+        
+    }
+}
+
+.accounts {
+    margin: 0 0 30px 0;
+    font-size: 12pt;
+
+    .accountsTitle {
+        padding: 10px 0;
+        font-size: 10pt;
+    }
+
+    .accountsList {
+        .accountRequest {
+            display: flex;
+             padding: 20px 0;
+        }
+
+        .accountCard {
+            margin: 0 0 10px 0;
+            .card-small {
+                background: rgb(191, 191, 191);
+                border-radius: 10px;
+                padding: 10px 10px;
+                .card {
+                    background: none;
+                    border: none;
+                    &.name {}
+                    &.status {
+                        font-size: 8pt;
+                        background: #04AE09 !important;
+                        border-radius: 10px;
+                        padding: 5px 5px 0px;
+                        text-transform: uppercase;
+                    }
+                    &.balance {
+                        font-size: 18pt;
+                    }
+                }
+
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px 0;
+                }
+                .card-content {
+                    display: flex;
+                    justify-content: flex-end;
+                    padding: 10px 0;
+                }
+
+            }
+        }
+    }
+
+}
+
+// * * {
+//     outline: 1px solid rgba(238, 130, 238, 0.484);
+// }

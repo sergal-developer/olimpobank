@@ -29,12 +29,6 @@ export class ResetComponent implements OnInit {
         this.searchClient(params.client);
       }
     });
-
-    this._activatedRoute.params.subscribe(params => {
-      console.log('module: ', params);
-      if (params.module) {
-      }
-    });
   }
 
   searchClient(clientID: string) {
@@ -120,11 +114,12 @@ export class ResetComponent implements OnInit {
   }
 
   login() {
-    if (this.service.loginClient(this.client)) {
-      console.log(this.client);
-      this.gc.currentUser = this.client;
-      this.gotoDashboard();
-    }
+    this.router.navigate(['/login']);
+    // if (this.service.loginClient(this.client)) {
+    //   console.log(this.client);
+    //   this.gc.currentUser = this.client;
+    //   this.gotoDashboard();
+    // }
   }
 
 }

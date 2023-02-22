@@ -82,11 +82,12 @@ export class RegisterComponent implements OnInit {
   }
 
   login() {
-    if (this.service.loginClient(this.credentials)) {
-      console.log(this.credentials);
-      this.gc.currentUser = this.credentials;
-      this.gotoDashboard();
-    }
+      this.router.navigate(['/login']);
+    // if (this.service.loginClient(this.credentials)) {
+    //   console.log(this.credentials);
+    //   this.gc.currentUser = this.credentials;
+    //   this.gotoDashboard();
+    // }
   }
 
   gotoRestore() {

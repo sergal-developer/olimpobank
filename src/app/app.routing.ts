@@ -24,10 +24,9 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'notification', component: NotificationsComponent },
   { path: 'help', component: HelpComponent },
-  { path: 'request', component: CardRequestComponent },
-  { path: 'card', component: CardDetailsComponent },
-  { path: 'transfer', component: BankTransferComponent },
-  { path: 'legal', component: LegalComponent },
+  { path: 'request/:type', component: CardRequestComponent },
+  { path: 'card/:id', component: CardDetailsComponent },
+  { path: 'card/:id/transfer', component: BankTransferComponent },
   { path: 'legal/:module', component: LegalComponent },
 ];
 

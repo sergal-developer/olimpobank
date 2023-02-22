@@ -32,6 +32,37 @@ export class OlimpoService {
         ];
     }
 
+    getCards(type: string) {
+        const cards = [
+            {
+                id: 111, name: "Debit", description: "Debito", type: 'debit',
+                commission: 0, annuity: 0, maxAmount: 0, cashback: 0, digital: false
+            },
+            {
+                id: 112, name: "Debit Atlant", description: "Debito Atlante", type: 'debit',
+                commission: 0, annuity: 300, maxAmount: 0, cashback: 0.03, digital: true
+            },
+            {
+                id: 113, name: "Debit Hiperion", description: "Debito Hiperion", type: 'debit',
+                commission: 0, annuity: 1000, maxAmount: 0, cashback: 0.10, digital: true
+            },
+            {
+                id: 211, name: "Hermes", description: "Hermes", type: 'credit',
+                commission: 0, annuity: 900, maxAmount: 20000, cashback: 0, digital: true, bankInterest: 0.2
+            },
+            {
+                id: 212, name: "Apollo", description: "Apolo", type: 'credit',
+                commission: 0, annuity: 1500, maxAmount: 100000, cashback: 0.03, digital: true, bankInterest: 0.2
+            },
+            {
+                id: 213, name: "Zeus", description: "Zeus", type: 'credit',
+                commission: 0, annuity: 3000, maxAmount: 600000, cashback: 0.10, digital: true, bankInterest: 0.2
+            },
+        ];
+
+        return cards.filter(x => x.type === type);
+    }
+
     loginClient(credentials: any) {
         const user = this.searchClient(credentials);
         if (!user) { return null; }
@@ -53,7 +84,7 @@ export class OlimpoService {
             this.oc.createClient(client.name, client.lastName, client.email, client.password);
             return this.searchClient(client);
         } else {
-            return null; 
+            return null;
         }
     }
 
@@ -63,20 +94,77 @@ export class OlimpoService {
             this.oc.updateClient(client);
             return this.searchClient(client);
         } else {
-            return null; 
+            return null;
         }
     }
     //#endregion ENV
 
-    //#region USERS
-    //#endregion USERS
-
     //#region PROFILE
+    getProfile(client: any) {
+        let user = this.searchClient(client);
+        if (!user.profile) {
+            user.profile = {
+                currency: 'MXN',
+                accounts: {
+                    debit: [],
+                    credit: [],
+                    digital: [],
+                }
+            };
+            this.updateClient(user);
+            user = this.searchClient(client);
+        }
+        return user;
+    }
     //#endregion PROFILE
 
     //#region CARDS
-        //#region TRANSACTIONS
-        //#endregion TRANSACTIONS
+    contractCard(card: any, client: any) {
+        try {
+            let user = this.getProfile(client);
+            const requestCard = {
+                description: card.description,
+                currency: user.profile.currency,
+                owner: `${user.name} ${user.lastName}`,
+                type: card.type,
+                commission: card.commission,
+                annuity: card.annuity,
+                maxAmount: card.maxAmount,
+                cashback: card.cashback,
+                digital: card.digital
+            };
+            const newCard = this.oc.createCard(requestCard);
+
+            console.log('card: ', newCard);
+            if (user.profile.accounts[card.type]) {
+                const linkCard = {
+                    id: newCard.id,
+                    account: newCard.account,
+                    name: newCard.name,
+                    balance: newCard.balance,
+                    currency: newCard.currency,
+                    active: newCard.active,
+                    turnedOn: newCard.turnedOn,
+                };
+                user.profile.accounts[card.type].push(linkCard);
+                this.updateClient(user);
+                user = this.searchClient(user);
+            }
+
+            console.log('user: ', user);
+            return newCard;
+        } catch (err) {
+            console.log('err: ', err);
+            return null;
+        }
+
+    }
+
+    getCardDetails(cardId: string) {
+        return this.oc.getCard({ id: cardId });
+    }
+    //#region TRANSACTIONS
+    //#endregion TRANSACTIONS
     //#endregion CARDS
 
     //#region CONVERTERS

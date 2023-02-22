@@ -9,54 +9,46 @@
   <div class="content">
     <div class="card-account">
       <div class="card-details">
-        <div class="function"></div>
-        <div class="card"></div>
-        <div class="function"></div>
+        <div class="function">Apagar</div>
+        <div class="card">
+          <div>{{ card.name }}</div>
+          <div>{{ card.cardNumber }}</div>
+          <div>
+            <span>expire: {{ card.expirationMonth }}/{{ card.expirationYear }}/</span>
+            <span>CVC: {{ card.cvc }}</span>
+          </div>
+
+          <div>{{ card.owner }}</div>
+        </div>
+        <div class="function">Tarjeta Digital</div>
       </div>
       <div class="card-balance-total">
-        $ 18,000.00 MXN
+        <div>${{ card.balance }} {{ card.currency }}</div>
       </div>
+
+
       <div class="card-operations">
-        <button>Enviar</button>
+        <button (click)="transfer()">Enviar</button>
         <button>Pagar</button>
         <button>Retirar</button>
       </div>
 
+
+      <h5>Transacciones</h5>
       <div class="card-history">
         <div class="information">
-          <div class="info-group">Legal</div>
-    
-    
-          <div class="info-list">
-            <div class="info-item">
-              Terminos y condiciones
+          <div class="info-list" >
+            <div class="info-item" *ngFor="let item of card.transactions">
+              <div>{{ item.date }}</div>
+              <div>{{ item.income }}</div>
+              <div>{{ item.emiter }}</div>
+              <div>${{ item.amount }} {{ item.currency }}</div>
             </div>
-    
-            <div class="info-item">
-              Constacia de situacion fiscal 
-            </div>
-    
           </div>
-    
-        </div>
-
-        <div class="information">
-          <div class="info-group">Legal</div>
-    
-    
-          <div class="info-list">
-            <div class="info-item">
-              Terminos y condiciones
-            </div>
-    
-            <div class="info-item">
-              Constacia de situacion fiscal 
-            </div>
-    
-          </div>
-    
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div>{{ card | json }}</div>

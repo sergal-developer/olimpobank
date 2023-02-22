@@ -46,6 +46,7 @@ export class OlimpoCore {
     //#region CRUD
     private searchTable(data: any, table: string, container: string, keySearch = 'id') {
         let storage = this.getStorage(table);
+        console.log('storage: ', storage);
         const id = data[keySearch];
         if (!id) {
             console.log(`the record no contains ${keySearch}`);
@@ -165,7 +166,7 @@ export class OlimpoCore {
     }
     //#endregion ENV
 
-    //#region USERSREGISTRED
+    //#region CLIENTS
     tableClient = "CLIENTS";
 
     getClients() {
@@ -209,30 +210,20 @@ export class OlimpoCore {
     //#endregion USERS
 
     //#region USERS
-    tableUser = "USER";
+    tableUser = "USERSESSION";
 
-    getUser() {
+    getUserSession() {
         const data = this.getStorage(this.tableUser);
-        return data.user || null;
+        if (data && (data.expire > new Date().getTime()) || !data) {
+            return null;
+        }
+
+        return data;
     }
 
-    createUser(name: string, lastName: string, email: string, password: string) {
-        let data = {
-            user: {
-                id: this.uuidv4(),
-                client: this.createPattern('xxxxxxx'),
-                name: name,
-                lastName: lastName,
-                email: email,
-                password: password,
-                active: true,
-            }
-        };
-        return this.createTable(data, this.tableUser);
-    }
-
-    updateUser(user: any) {
-        return this.updateTable(user, this.tableUser, 'user');
+    createUserSession(user: any) {
+        user.expire = new Date().setHours(1);
+        return this.createTable(user, this.tableUser);
     }
     //#endregion USERS
 
@@ -245,7 +236,7 @@ export class OlimpoCore {
     }
 
     createProfile() {
-        const user = this.getUser();
+        const user = this.getUserSession();
         const data = this.getStorage(this.tableProfile);
         data.content = {
             userId: user.id,
@@ -284,7 +275,7 @@ export class OlimpoCore {
         const card = {
             id: this.uuidv4(),
             account: this.createPattern('xxxxxx'),
-            name: this.createPattern('**** xxxx'),
+            name: data.description,
             balance: 0,
             currency: data.currency,
             active: true,
@@ -296,10 +287,16 @@ export class OlimpoCore {
             cvc: this.createPattern('xxx'),
             owner: data.owner,
             type: data.type,
+            commission: data.commission,
+            annuity: data.annuity,
+            maxAmount: data.maxAmount,
+            cashback: data.cashback,
+            digital: data.digital,
             transactions: []
         }
         cards.content.push(card);
-        return this.createTable(cards, this.tableCard);
+        this.createTable(cards, this.tableCard);
+        return this.getCard(card);
     }
 
     updateCard(data: any) {

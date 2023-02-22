@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-legal',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LegalComponent implements OnInit {
 
-  constructor() { }
+  module: any = null;
+  constructor(private _activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this._activatedRoute.params.subscribe(params => {
+      console.log('module: ', params);
+      if (params.module) {
+        this.module = params.module
+      }
+    });
   }
 
 }
