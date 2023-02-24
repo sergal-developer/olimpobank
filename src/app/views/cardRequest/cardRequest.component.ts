@@ -32,7 +32,6 @@ export class CardRequestComponent implements OnInit {
 
   getCards(type: string) {
     this.cards = this.service.getCards(type);
-    console.log('this.cards: ', this.cards);
   }
 
   contract(card: any) {

@@ -46,10 +46,8 @@ export class OlimpoCore {
     //#region CRUD
     private searchTable(data: any, table: string, container: string, keySearch = 'id') {
         let storage = this.getStorage(table);
-        console.log('storage: ', storage);
         const id = data[keySearch];
         if (!id) {
-            console.log(`the record no contains ${keySearch}`);
             return null;
         }
         try {
@@ -57,7 +55,6 @@ export class OlimpoCore {
             return storage[container].filter((x: any) => { return x[keySearch] === id })[0];
         }
         catch (err) {
-            console.log(err);
             return null;
         }
     }
@@ -73,7 +70,6 @@ export class OlimpoCore {
             return storage;
         }
         catch (err) {
-            console.log(err);
             return null;
         }
     }
@@ -90,7 +86,6 @@ export class OlimpoCore {
             return storage;
         }
         catch (err) {
-            console.log(err);
             return null;
         }
     }
@@ -100,7 +95,6 @@ export class OlimpoCore {
         const keys = Object.keys(data);
         const id = data[keySearch];
         if (!id) {
-            console.log(`the record no contains ${keySearch}`);
             return null;
         }
 
@@ -115,7 +109,6 @@ export class OlimpoCore {
             return storage;
         }
         catch (err) {
-            console.log(err);
             return null;
         }
     }
@@ -320,7 +313,6 @@ export class OlimpoCore {
         // update data 
         const card = this.getCard({ id: idcard });
         if (!card) {
-            console.log('no exist data in card')
         }
 
         card.balance = parseInt(card.balance, 10);
@@ -328,7 +320,6 @@ export class OlimpoCore {
         if (data.income) {
             card.transactions.push(transaction);
             card.balance += parseInt(data.amount, 10);
-            console.log('card.balance ', card.balance)
         } else {
             const diference = card.balance - parseInt(data.amount, 10);
             if (diference >= 0) {
@@ -342,11 +333,8 @@ export class OlimpoCore {
         if (linkCard.length) {
             linkCard[0].balance = card.balance;
 
-            console.log('linkCard: ', linkCard);
-            console.log('card: ', card);
             cardUpdated = this.updateCard(card);
             const profile = this.updateClient(client);
-            console.log('profile: ', profile);
         }
         return cardUpdated;
     }
@@ -356,7 +344,6 @@ export class OlimpoCore {
         let card = this.getCard({ cardNumber: transaction.receptor }, 'cardNumber');
             card = card || this.getCard({ CLABE: transaction.receptor }, 'CLABE');
         if (!card) {
-            console.log('no exist data in card')
         }
 
         card.balance = parseInt(card.balance, 10);
@@ -364,7 +351,6 @@ export class OlimpoCore {
         if (transaction.income) {
             card.transactions.push(transaction);
             card.balance += parseInt(transaction.amount, 10);
-            console.log('card.balance ', card.balance)
         } else {
             const diference = card.balance - parseInt(transaction.amount, 10);
             if (diference >= 0) {
@@ -373,7 +359,6 @@ export class OlimpoCore {
             }
         }
 
-        console.log('card: ', card);
     }
     //#endregion TRANSACTIONS
     //#endregion CARDS

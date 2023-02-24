@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">olimpobank</string>
+    <string name="title_activity_main">olimpobank</string>
+    <string name="package_name">com.olimpobank.mx.app</string>
+    <string name="custom_url_scheme">com.olimpobank.mx.app</string>
+</resources>

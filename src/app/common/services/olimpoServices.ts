@@ -150,7 +150,6 @@ export class OlimpoService {
             };
             const newCard = this.oc.createCard(requestCard);
 
-            console.log('card: ', newCard);
             if (user.profile.accounts[card.type]) {
                 const linkCard = {
                     id: newCard.id,
@@ -168,10 +167,8 @@ export class OlimpoService {
                 user = this.searchClient(user);
             }
 
-            console.log('user: ', user);
             return newCard;
         } catch (err) {
-            console.log('err: ', err);
             return null;
         }
 
@@ -189,7 +186,6 @@ export class OlimpoService {
 
     validateTransactions() {
         const cards = this.oc.getCards();
-        console.log('cards: ', cards.content);
         const transactions: any = [];
         cards.content.forEach((card: any) => {
             card.transactions.forEach((tra: any) => {
@@ -210,7 +206,6 @@ export class OlimpoService {
 
         });
 
-        console.log('transactions: ', transactions);
     }
     //#endregion TRANSACTIONS
     //#endregion CARDS

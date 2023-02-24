@@ -13,7 +13,6 @@ export class LegalComponent implements OnInit {
 
   ngOnInit() {
     this._activatedRoute.params.subscribe(params => {
-      console.log('module: ', params);
       if (params.module) {
         this.module = params.module
       }

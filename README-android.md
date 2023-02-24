@@ -4,6 +4,13 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Requirements
 
-https://betterprogramming.pub/how-to-convert-your-angular-application-to-a-native-mobile-app-android-and-ios-c212b38976df
+## Comandos
 
-https://capacitorjs.com/docs/v3/getting-started/environment-setup
+- Generar proyecto android
+npx cap add android
+
+-sincronizar con android studio
+npx cap sync
+
+- Abrir android studio y ejecutar en dispositivos o emuladores
+npx cap open android

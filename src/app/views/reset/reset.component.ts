@@ -34,7 +34,6 @@ export class ResetComponent implements OnInit {
   searchClient(clientID: string) {
     clientID = this.service.decode(clientID);
     this.client = this.service.searchClient({ client: clientID });
-    console.log('this.client: ', this.client);
   }
 
   restore() {

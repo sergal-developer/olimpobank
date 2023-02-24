@@ -34,7 +34,6 @@ export class InternalAppComponent implements OnInit {
   }
 
   getUser() {
-    console.log('this.gc.currentUser : ', this.gc.currentUser );
     if (this.gc.currentUser) {
       this.user = this.gc.currentUser;
       this.getProfile();

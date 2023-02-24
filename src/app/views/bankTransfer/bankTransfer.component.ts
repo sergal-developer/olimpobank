@@ -29,7 +29,6 @@ export class BankTransferComponent implements OnInit {
   ngOnInit() {
     this.configHeader();
     this._activatedRoute.params.subscribe(params => {
-      console.log('params: ', params);
       if (params.id) {
         this.cardId = params.id;
         this.operation = params.operation;
@@ -68,10 +67,8 @@ export class BankTransferComponent implements OnInit {
     transaction.issuing = this.card.CLABE;
     transaction.receptor = transaction.account;
     transaction.status = 'PENDING';
-    console.log('transaction: ', transaction);
 
     const tra = this.service.transaction(transaction, this.card, this.gc.currentUser);
-    console.log('tra: ', tra);
 
     this.gotoCard();
 

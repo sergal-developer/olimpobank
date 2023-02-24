@@ -28,7 +28,6 @@ export class CardDetailsComponent implements OnInit {
   ngOnInit() {
     this.configHeader();
     this._activatedRoute.params.subscribe(params => {
-      console.log('params: ', params);
       if (params.id) {
         this.cardId = params.id;
         this.getCard(this.cardId);
@@ -42,7 +41,6 @@ export class CardDetailsComponent implements OnInit {
     const referenceCard = baseCards.filter(x => x.id === this.card.referenceCard);
     this.referenceCard = referenceCard.length ? referenceCard[0] : null;
 
-    console.log('this.cards: ', this.card);
     this.convertItems(this.card);
   }
 
