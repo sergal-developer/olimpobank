@@ -1,6 +1,6 @@
 
 .input {
-    font-size: 9pt;
+    font-size: 100%;
     color: var(--textColor);
     width: 100%;
     min-width: 100px;
@@ -18,7 +18,7 @@
             pointer-events: none;
             top: 30%;
             left: 20px;
-            font-size: 9pt;
+            font-size: 100%;
             transition: 0.2s ease all;
         }
 

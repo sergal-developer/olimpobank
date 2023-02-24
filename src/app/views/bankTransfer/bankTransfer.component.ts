@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalConstants } from 'src/app/common/globals/globalConstants';
+import { HelperTransform } from 'src/app/common/helpers/helpersTrasnform';
 import { OlimpoService } from 'src/app/common/services/olimpoServices';
 
 @Component({
@@ -15,6 +16,8 @@ export class BankTransferComponent implements OnInit {
   profile: any = null;
   responseMessage: string = '';
   operation: string = '';
+
+  _helperTransform = new HelperTransform();
 
   constructor(
     private router: Router,
@@ -38,6 +41,7 @@ export class BankTransferComponent implements OnInit {
   getCard(cardId: string) {
     this.card = this.service.getCardDetails(cardId);
     this.profile = this.service.getProfile(this.gc.currentUser);
+    this.convertItems(this.card);
   }
 
   send() {
@@ -75,6 +79,17 @@ export class BankTransferComponent implements OnInit {
 
   gotoCard() {
     this.router.navigate(['/app/card', this.cardId]);
+  }
+
+  convertItems(card: any) {
+    card._balance = this._helperTransform.toMoney(card.balance);
+    card._cardNumber = this._helperTransform.formatCardNumber(card.cardNumber);
+    card._CLABE = this._helperTransform.formatCardNumber(card.CLABE);
+
+    card.transactions.forEach((t: any) => {
+      t._amount = this._helperTransform.toMoney(t.amount);
+      t._date = this._helperTransform.toDate(t.date);
+    });
   }
 
   configHeader() {

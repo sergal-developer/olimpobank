@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
   //#region LIFECICLE
   constructor(
-    private _gc: GlobalConstants,
+    public _gc: GlobalConstants,
     private _router: Router
     ) { }
 

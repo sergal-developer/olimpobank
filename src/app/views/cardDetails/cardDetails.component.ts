@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalConstants } from 'src/app/common/globals/globalConstants';
+import { HelperTransform } from 'src/app/common/helpers/helpersTrasnform';
 import { OlimpoService } from 'src/app/common/services/olimpoServices';
 
 @Component({
@@ -14,6 +15,8 @@ export class CardDetailsComponent implements OnInit {
   card: any = null;
   showReferenceCard = false;
   referenceCard: any = null;
+  
+  _helperTransform = new HelperTransform();
 
   constructor(
     private router: Router,
@@ -35,12 +38,12 @@ export class CardDetailsComponent implements OnInit {
 
   getCard(cardId: string) {
     this.card = this.service.getCardDetails(cardId);
-
     const baseCards = this.service.getCards();
     const referenceCard = baseCards.filter(x => x.id === this.card.referenceCard);
     this.referenceCard = referenceCard.length ? referenceCard[0] : null;
-    console.log('this.referenceCard: ', this.referenceCard);
+
     console.log('this.cards: ', this.card);
+    this.convertItems(this.card);
   }
 
   transfer() {
@@ -57,6 +60,17 @@ export class CardDetailsComponent implements OnInit {
 
   detailsCard() {
     this.showReferenceCard = !this.showReferenceCard;
+  }
+
+  convertItems(card: any) {
+    card._balance = this._helperTransform.toMoney(card.balance);
+    card._cardNumber = this._helperTransform.formatCardNumber(card.cardNumber);
+    card._CLABE = this._helperTransform.formatCardNumber(card.CLABE);
+
+    card.transactions.forEach((t: any) => {
+      t._amount = this._helperTransform.toMoney(t.amount);
+      t._date = this._helperTransform.toDate(t.date);
+    });
   }
 
   configHeader() {

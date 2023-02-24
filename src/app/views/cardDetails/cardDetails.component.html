@@ -19,7 +19,7 @@
               <div class="card-header">
                 <div class="card-header-name">
                   <h3>{{ card.name }}</h3>
-                  <h5 class="emphasis">{{ card.cardNumber }}</h5>
+                  <h5 class="emphasis">{{ card._cardNumber }}</h5>
                 </div>
                 <div class="card-header-status">
                   <div class="label-status">
@@ -58,7 +58,7 @@
 
     </div>
     <div class="card-balance-total">
-      <div>${{ card.balance }} {{ card.currency }}</div>
+      <div>{{ card._balance }} {{ card.currency }}</div>
     </div>
 
 
@@ -72,9 +72,9 @@
     <hr class="my-4">
     <div class="card-transactions">
       <div class="transaction" *ngFor="let item of card.transactions" [ngClass]="{'income': item.income, 'budget': !item.income}">
-        <div>{{ item.date }}</div>
+        <div>{{ item._date }}</div>
         <div>{{ item.concept }}</div>
-        <div>${{ item.amount }} {{ item.currency }}</div>
+        <div>{{ item._amount }} {{ item.currency }}</div>
       </div>
     </div>
   </div>

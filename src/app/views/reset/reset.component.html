@@ -1,10 +1,13 @@
 <ng-container *ngIf="!updatedPassword">
   <div class="screen-form alingToCenter" *ngIf="client">
-    <div class="form" id="resetPassword">
-      <h1>Reestablecer!</h1>
-      <h3>{{ client.name }} {{ client.lastName }}</h3>
+    <h1>Reestablecer!</h1>
+      <!-- <h3>{{ client.name }} {{ client.lastName }}</h3> -->
+      <h3>{{ client.email }}</h3>
       <h4 class="link">Cliente: {{ client.client }}</h4>
-      <h4>{{ client.email }}</h4>
+      
+
+    <div class="form" id="resetPassword">
+      
 
       <app-input [id]="'password'" [title]="'Contraseña'" [required]="true"></app-input>
       <app-input [id]="'passwordConfirmation'" [title]="'Confirmar Contraseña'" [required]="true"></app-input>
@@ -20,10 +23,12 @@
   </div>
 
   <div class="screen-form alingToCenter" *ngIf="!client">
-    <div class="form" id="restore">
-      <h1>Reestablecer!</h1>
+    <h1>Reestablecer!</h1>
       <h5 class="emphasis">¿que cuenta se va a reestablecer?</h5>
 
+
+    <div class="form" id="restore">
+      
       <app-input [id]="'user'" [title]="'Usuario / Cuenta'" [required]="true"></app-input>
 
       <div class="col-12" *ngIf="responseMessage">

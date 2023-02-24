@@ -5,7 +5,7 @@ import { CONTEXTNAME } from "./contextNames";
 export class GlobalConstants {
     context = '';
     mainContext = CONTEXTNAME.GLOBAL;
-    
+
     get currentUser() {
         const USESSION = localStorage.getItem('USESSION');
         const data = USESSION ? JSON.parse(USESSION) : null;
@@ -14,7 +14,7 @@ export class GlobalConstants {
             return null;
         }
         return data;
-     }
+    }
 
     set currentUser(user) {
         user.expire = new Date().setHours(1);
@@ -29,7 +29,12 @@ export class GlobalConstants {
         lateralMenu: { show: false },
     }
 
-    constructor() {}
+    mainLoader = {
+        content: 'Cargando...',
+        show: false
+    }
+
+    constructor() { }
 
     reset() {
         this.context = '';
@@ -37,5 +42,16 @@ export class GlobalConstants {
         this.currentUser = null;
     }
 
-    
+    showLoader() {
+        if (this.mainLoader.show) {
+            this.mainLoader.show = false;
+        }
+        this.mainLoader.show = true;
+    }
+
+    closeLoader() {
+        this.mainLoader.show = false;
+    }
+
+
 }

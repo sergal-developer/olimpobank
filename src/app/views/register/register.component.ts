@@ -41,9 +41,7 @@ export class RegisterComponent implements OnInit {
         }
       }
     });
-    console.log('credentials: ', credentials);
     
-    console.log(invalidFields);
     if (invalidFields.length) {
       this.responseMessage = `debe de llenar los campos requeridos`;
       return;
@@ -58,6 +56,8 @@ export class RegisterComponent implements OnInit {
       this.responseMessage = `Debe de aceptar los terminos y condiciones`;
       return;
     }
+
+    this.gc.showLoader();
 
     // check if exist client 
     let clientExist = this.service.searchClient(credentials);
@@ -108,8 +108,12 @@ export class RegisterComponent implements OnInit {
 
   goWelcomeScreen() {
     this.welcomeScreen = true;
+
     setTimeout(() => {
-      this.login();
-    }, 8000);
+      this.gc.closeLoader();
+    }, 3000);
+    // setTimeout(() => {
+    //   this.login();
+    // }, 8000);
   }
 }

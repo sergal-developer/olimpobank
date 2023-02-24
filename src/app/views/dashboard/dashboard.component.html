@@ -8,7 +8,7 @@
           <button app-button class="circular"><i class="fa-solid fa-plus"></i></button>
         </div>
       </div>
-      
+
     </div>
 
     <div class="accountsList">
@@ -23,7 +23,7 @@
           <div class="card-header">
             <div class="card-header-name">
               <h3>{{ account.name }}</h3>
-              <h5 class="emphasis">{{ account.cardNumber }}</h5>
+              <h5 class="emphasis">{{ account._cardNumber }}</h5>
             </div>
             <div class="card-header-status">
               <div class="label-status">
@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="card-content">
-            <div class="card-content-balance">${{ account.balance }} {{ account.currency }}</div>
+            <div class="card-content-balance">{{ account._balance }} {{ account.currency }}</div>
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@
           <div class="card-header">
             <div class="card-header-name">
               <h3>{{ account.name }}</h3>
-              <h5 class="emphasis">{{ account.cardNumber }}</h5>
+              <h5 class="emphasis">{{ account._cardNumber }}</h5>
             </div>
             <div class="card-header-status">
               <div class="label-status">
@@ -75,7 +75,7 @@
             </div>
           </div>
           <div class="card-content">
-            <div class="card-content-balance">${{ account.balance }} {{ account.currency }}</div>
+            <div class="card-content-balance">{{ account._balance }} {{ account.currency }}</div>
           </div>
         </div>
       </div>
