@@ -27,19 +27,23 @@ export class RegisterComponent implements OnInit {
     this.responseMessage = '';
     const inputs = document.querySelectorAll('#register input');
     const credentials: any = {}
-    const invalidFields = [];
+    const invalidFields: any = [];
 
     inputs.forEach((input: any) => {
-      if (input.required && !input.value) {
-        invalidFields.push(input);
-      }
+      
       if (input.id === 'terms') {
         credentials[input.id] = input.checked;
       } else {
         credentials[input.id] = input.value;
+        
+        if (input.required && !input.value) {
+          invalidFields.push(input);
+        }
       }
     });
-
+    console.log('credentials: ', credentials);
+    
+    console.log(invalidFields);
     if (invalidFields.length) {
       this.responseMessage = `debe de llenar los campos requeridos`;
       return;
@@ -83,11 +87,6 @@ export class RegisterComponent implements OnInit {
 
   login() {
       this.router.navigate(['/login']);
-    // if (this.service.loginClient(this.credentials)) {
-    //   console.log(this.credentials);
-    //   this.gc.currentUser = this.credentials;
-    //   this.gotoDashboard();
-    // }
   }
 
   gotoRestore() {
@@ -104,7 +103,7 @@ export class RegisterComponent implements OnInit {
   }
 
   gotoDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/app']);
   }
 
   goWelcomeScreen() {

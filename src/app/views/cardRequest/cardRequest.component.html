@@ -1,47 +1,40 @@
-<div class="screen-view">
-  <div class="header">
-    <div class="return"> r </div>
-    <div class="title">Tarjeta de debito</div>
-    <div class="options">op</div>
+
+<div class="content">
+
+<div class="information" *ngFor="let card of cards">
+  <div class="info-card">
+    {{ card.description }}
   </div>
 
-  <div class="content">
-    
-    <div class="information" *ngFor="let card of cards">
-      <div class="info-card">
-        {{ card.description }}
-      </div>
-
-      <div class="info-list">
-        <div class="info-item">
-          <span *ngIf="card.commission === 0">Sin comision por uso</span>
-          <span *ngIf="card.commission != 0">{{ card.commission }}% de comision por uso</span>
-        </div>
-
-        <div class="info-item">
-          <span *ngIf="card.annuity === 0">Sin anualidad</span>
-          <span *ngIf="card.annuity != 0">${{ card.annuity }} de anualidad</span>
-        </div>
-
-        <div class="info-item" *ngIf="card.maxAmount">
-          <span>monto maximo dee credito ${{ card.maxAmount }}</span>
-        </div>
-
-        <div class="info-item">
-          <span *ngIf="card.cashback === 0">Sin cashback</span>
-          <span *ngIf="card.cashback != 0">{{ card.cashback }}% de cashback</span>
-        </div>
-
-        <div class="info-item">
-          <span *ngIf="!card.digital">Sin tarjeta digital</span>
-          <span *ngIf="card.digital">Con tarjeta digital</span>
-        </div>
-        
-        <hr class="my-4">
-        <button class="btn btn-primary btn-lg" (click)="contract(card)">Contratar</button>
-
-      </div>
-
+  <div class="info-list">
+    <div class="info-item">
+      <span *ngIf="card.commission === 0">Sin comision por uso</span>
+      <span *ngIf="card.commission != 0">{{ card.commission }}% de comision por uso</span>
     </div>
+
+    <div class="info-item">
+      <span *ngIf="card.annuity === 0">Sin anualidad</span>
+      <span *ngIf="card.annuity != 0">${{ card.annuity }} de anualidad</span>
+    </div>
+
+    <div class="info-item" *ngIf="card.maxAmount">
+      <span>monto maximo dee credito ${{ card.maxAmount }}</span>
+    </div>
+
+    <div class="info-item">
+      <span *ngIf="card.cashback === 0">Sin cashback</span>
+      <span *ngIf="card.cashback != 0">{{ card.cashback }}% de cashback</span>
+    </div>
+
+    <div class="info-item">
+      <span *ngIf="!card.digital">Sin tarjeta digital</span>
+      <span *ngIf="card.digital">Con tarjeta digital</span>
+    </div>
+    
+    <hr class="my-4">
+    <button class="btn btn-primary btn-lg" (click)="contract(card)">Contratar</button>
+
   </div>
+
+</div>
 </div>

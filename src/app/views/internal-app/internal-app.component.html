@@ -1,0 +1,62 @@
+<div class="screen-view">
+
+    <div class="screen-view-header" *ngIf="gc && gc.headerOptions">
+        <div class="return" *ngIf="gc.headerOptions.return.show" (click)="goReturn()">
+            <button app-button class="circular"><i class="fa-solid fa-chevron-left"></i></button>
+        </div>
+
+        <div class="user" *ngIf="gc.headerOptions.profile.show">
+            <span>Hola, {{ user.name }}</span>
+        </div>
+
+        <div class="title" *ngIf="gc.headerOptions.title.show">
+            <h1 [innerHTML]="gc.headerOptions.title.content"></h1>
+        </div>
+
+        <div class="options">
+            <div *ngIf="gc.headerOptions.lateralMenu.show">
+                <div app-button class="icon" (click)="openOptions()"><i class="fa-solid fa-bars"></i></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="screen-view-content">
+        <router-outlet></router-outlet>
+    </div>
+
+</div>
+
+<panel-component [id]="panel.id" [title]="panel.title" [size]="panel.size"
+    [closeOnClickOverlap]="panel.closeOnClickOverlap" [customClass]="panel.customClass" [(open)]="panel.open"
+    [showClose]="panel.showClose">
+    <ng-container body>
+
+        <div class="menu-list">
+            <div class="item" (click)="goProfile()">
+                <div class="icon"></div>
+                <div class="text">Mi Perfil</div>
+            </div>
+
+            <div class="item" (click)="goNotifications()">
+                <div class="icon"></div>
+                <div class="text">Notificaciones</div>
+            </div>
+
+            <div class="item" (click)="goHelp()">
+                <div class="icon"></div>
+                <div class="text">Ayuda</div>
+            </div>
+
+            <div class="item" (click)="closeSession()">
+                <div class="icon"></div>
+                <div class="text">Cerrar Sessión</div>
+            </div>
+
+            <div class="item">
+                <div class="icon"></div>
+                <div class="text">Ultimo Acceso</div>
+            </div>
+        </div>
+    </ng-container>
+</panel-component>

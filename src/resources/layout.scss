@@ -1,11 +1,19 @@
 @import 'core/colors';
 
+.page {
+    padding: 30px;
+}
+
+
 .screen-view {
     width: 360px;
     height: 740px;
-    background-color: rgb(239, 239, 239);
-    border: 1px solid #333;
-    padding: 30px;
+
+    width: 100vw;
+    height: 100vh;
+    // background-color: rgb(239, 239, 239);
+    // border: 1px solid #333;
+    
     display: flex;
     flex-direction: column;
 
@@ -17,39 +25,10 @@
     }
 }
 
-h1, h2, h3, h4, h5, h6 {
-    font-weight: normal;
-    
-}
 
-h1 {
-    font-size: 50px;
-}
-
-h2 {
-    font-size: 30px;
-}
-
-h3 {
-    font-size: 25px;
-}
-
-h4 {
-    font-size: 20px;
-}
-
-h5 {
-    font-size: 18px;
-}
-
-h6 {
-    font-size: 16px;
-}
-
-
-.header {
+.screen-view-header {
     height: 75px;
-    margin: -30px -30px 30px -30px;
+    margin: 0;
     display: flex;
     flex-direction: row;
     align-content: center;
@@ -62,6 +41,39 @@ h6 {
         
     }
 }
+
+.screen-view-content {
+    height: calc(100vh - 75px);
+    max-height: calc(100vh - 75px);
+    padding: 30px;
+    overflow: auto;
+}
+
+.screen-view-full-content {
+    height: 100vh;
+    width: 100vw;
+    max-height: 100vh;
+    max-width: 100vw;
+    padding: 30px;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.screen-form {
+    width: 80vw;
+
+    &.alingToCenter {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: stretch;
+        align-content: space-between;
+        text-align: center;
+    }
+}
+
 
 .accounts {
     margin: 0 0 30px 0;
@@ -117,6 +129,26 @@ h6 {
 
 }
 
+.logo {
+    width: 100%;
+    height: auto;
+    animation: fade 3s ease 0s infinite normal none;
+}
+
+@keyframes fade {
+    
+    0%,25% {
+      opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 1;
+    }
+    
+  }
+
 // * * {
-//     outline: 1px solid rgba(238, 130, 238, 0.484);
+//     outline: 1px solid rgb(242, 197, 242);
 // }

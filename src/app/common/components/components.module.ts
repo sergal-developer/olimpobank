@@ -1,17 +1,21 @@
 import { NgModule } from '@angular/core';
-// import { ListModule } from './list/list.module';
+import { ButtonModule } from './button/button.module';
+import { CheckboxModule } from './checkbox/checkbox.module';
+import { InputModule } from './input/input.module';
 import { PanelModule } from './panel/panel.module';
 
 @NgModule({
-  declarations: [
-    // FreshAutofocusDirective
-  ],
+  declarations: [],
   imports: [
-    // ListModule,
+    ButtonModule,
+    CheckboxModule,
+    InputModule,
     PanelModule
   ],
   exports: [
-    // ListModule,
+    ButtonModule,
+    CheckboxModule,
+    InputModule,
     PanelModule
   ]
 })

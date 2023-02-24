@@ -21,6 +21,7 @@ export class CardDetailsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.configHeader();
     this._activatedRoute.params.subscribe(params => {
       console.log('params: ', params);
       if (params.id) {
@@ -36,11 +37,21 @@ export class CardDetailsComponent implements OnInit {
   }
 
   transfer() {
-    this.router.navigate(['/card', this.card.id, 'transfer']);
+    this.router.navigate(['/app/card', this.card.id, 'transfer']);
   }
 
   payments() {
-    this.router.navigate(['/card', this.card.id, 'pay']);
+    this.router.navigate(['/app/card', this.card.id, 'pay']);
   }
 
+  configHeader() {
+    setTimeout(() => {
+      this.gc.headerOptions.return.show = true;
+      this.gc.headerOptions.return.route = '/app';
+      this.gc.headerOptions.profile.show = false;
+      this.gc.headerOptions.title.show = true;
+      this.gc.headerOptions.title.content = `Tarjeta ${ this.card.cardNumber }`;
+      this.gc.headerOptions.lateralMenu.show = false;
+    }, 200);
+  }
 }

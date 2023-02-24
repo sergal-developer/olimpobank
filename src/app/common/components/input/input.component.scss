@@ -1,0 +1,48 @@
+
+.input {
+    font-size: 9pt;
+    color: var(--textColor);
+    width: 100%;
+    min-width: 100px;
+    position: relative;
+    margin: 0 10px 10px 0;
+
+    .innerControl {
+        background: #262A34;
+        border-radius: 15px;
+        height: 60px;
+        width: inherit;
+
+        label {
+            position: absolute;
+            pointer-events: none;
+            top: 30%;
+            left: 20px;
+            font-size: 9pt;
+            transition: 0.2s ease all;
+        }
+
+        input {
+            width: inherit;
+            height: inherit;
+            background-color: transparent;
+            border-radius: 15px;
+            padding: 20px;
+            color: var(--textColor);
+            display: block;
+            border: none;
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        input:focus~label,
+        input:valid~label, 
+        input.empty~label {
+            font-size: 8pt;
+            color: var(--emphasisColor);
+            top: 0px;
+        }
+    }
+}

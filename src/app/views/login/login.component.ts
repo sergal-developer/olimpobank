@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
   gotoDashboard() {
     console.log('this.gc.currentUser : ', this.gc.currentUser );
     if (this.gc.currentUser) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate(['/app']);
     }
   }
 }

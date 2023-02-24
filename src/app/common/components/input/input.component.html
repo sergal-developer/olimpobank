@@ -1,0 +1,15 @@
+<div class="input {{ customClass }}" [ngClass]="{
+  'disabled': disabled || loading,
+  'error': invalid,
+  'empty': !value }" >
+
+  <div class="innerControl">
+    <input id="{{ id }}"
+      [attr.type]="typeInput"
+      [(ngModel)]="value"
+      [attr.tabindex]="tabindex"
+      [attr.required]="required">
+    <label [attr.for]="id"
+      [innerHTML]="title"></label>
+  </div>
+</div>

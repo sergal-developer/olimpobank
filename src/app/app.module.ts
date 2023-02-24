@@ -8,9 +8,12 @@ import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ComponentsModule } from './common/components/components.module';
 import { GlobalConstants } from './common/globals/globalConstants';
-import { ViewsModule } from './views/views.module';
 import { OlimpoService } from './common/services/olimpoServices';
 import { OlimpoCore } from './common/services/olimpoCore';
+import { SecurityModulePackage } from './views/security/security.module';
+import { InternalAppModulePackage } from './views/internal-app/internal-app.module';
+import { UXModule } from './views/UX/UX.module';
+import { LegalModule } from './views/legal/legal.module';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,12 @@ import { OlimpoCore } from './common/services/olimpoCore';
     FormsModule,
     ReactiveFormsModule,
     ComponentsModule,
-    ViewsModule
+    
+    LegalModule,
+    UXModule,
+
+    ...SecurityModulePackage.modules,
+    ...InternalAppModulePackage.modules,
   ],
   providers: [
     GlobalConstants,

@@ -106,20 +106,15 @@ export class ResetComponent implements OnInit {
     this.updatedPassword = true;
     setTimeout(() => {
       this.login();
-    }, 8000);
+    },5000);
   }
 
   gotoDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/app']);
   }
 
   login() {
     this.router.navigate(['/login']);
-    // if (this.service.loginClient(this.client)) {
-    //   console.log(this.client);
-    //   this.gc.currentUser = this.client;
-    //   this.gotoDashboard();
-    // }
   }
 
 }

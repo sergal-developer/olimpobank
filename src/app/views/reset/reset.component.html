@@ -1,62 +1,50 @@
-<div class="screen-view" *ngIf="client">
-  <div class="needs-validation view-container" id="resetPassword">
-    <div class="row g-3">
+<ng-container *ngIf="!updatedPassword">
+  <div class="screen-form alingToCenter" *ngIf="client">
+    <div class="form" id="resetPassword">
+      <h1>Reestablecer!</h1>
+      <h3>{{ client.name }} {{ client.lastName }}</h3>
+      <h4 class="link">Cliente: {{ client.client }}</h4>
+      <h4>{{ client.email }}</h4>
 
-      <div class="col-12">
-        <h3>{{ client.name }} {{ client.lastName }}</h3>
-        <h4><b>({{ client.client }})</b></h4>
-        <h4>{{ client.email }}</h4>
-      </div>
-
-      <div class="col-12">
-        <label for="password" class="form-label">Constraseña</label>
-        <input type="text" class="form-control" id="password" required="">
-        <div class="invalid-feedback">
-          Esta campo debe de estar lleno
-        </div>
-      </div>
-
-      
-      <div class="col-12">
-        <label for="text" class="form-label">Seguridad</label>
-      </div>
-
-      <div class="col-12">
-        <label for="passwordConfirmation" class="form-label">Confirmar Constraseña</label>
-        <input type="text" class="form-control" id="passwordConfirmation" required="">
-        <div class="invalid-feedback">
-          Esta campo debe de estar lleno
-        </div>
-      </div>
-
-    </div>
-    <hr class="my-4">
-    <button class="btn btn-primary btn-lg" (click)="updatePassword()">Actualizar</button>
-  </div> 
-</div>
-
-<div class="screen-view" *ngIf="!client">
-  <div class="needs-validation view-container" id="restore">
-    <div class="row g-3">
-
-      <div class="col-12">
-        <label for="user" class="form-label">Usuario / Cuenta</label>
-        <input type="text" class="form-control" id="user" required="">
-      </div>
+      <app-input [id]="'password'" [title]="'Contraseña'" [required]="true"></app-input>
+      <app-input [id]="'passwordConfirmation'" [title]="'Confirmar Contraseña'" [required]="true"></app-input>
 
       <div class="col-12" *ngIf="responseMessage">
         <span>{{ responseMessage }}</span>
       </div>
 
+      <div class="col-12">
+        <button app-button class="big" (click)="updatePassword()">Actualizar</button>
+      </div>
     </div>
-    <hr class="my-4">
-    <button class="btn btn-primary btn-lg" (click)="restore()">Recuperar</button>
-  </div> 
-</div>
+  </div>
+
+  <div class="screen-form alingToCenter" *ngIf="!client">
+    <div class="form" id="restore">
+      <h1>Reestablecer!</h1>
+      <h5 class="emphasis">¿que cuenta se va a reestablecer?</h5>
+
+      <app-input [id]="'user'" [title]="'Usuario / Cuenta'" [required]="true"></app-input>
+
+      <div class="col-12" *ngIf="responseMessage">
+        <span>{{ responseMessage }}</span>
+      </div>
+
+      <div class="col-12">
+        <button app-button class="big" (click)="restore()">Recuperar</button>
+      </div>
+    </div>
+  </div>
+</ng-container>
 
 
-<div class="popup" *ngIf="updatedPassword">
-  El usuario se a actualizado con exito!!
+<div class="screen-form alingToCenter" *ngIf="updatedPassword">
+  <div class="form" id="restore">
+    <h1>Actualización Correcta</h1>
+    <h5 class="emphasis">El usuario se ha reestablecido con exito!!</h5>
 
-  <button class="btn btn-primary btn-lg" (click)="login()">Login</button>
+    <p>Sera redirigido al inicio en 5 seg
+    </p>
+    <p>Se requeria que se auntentique con su usuario y contraseña actualizada.</p>
+  </div>
 </div>

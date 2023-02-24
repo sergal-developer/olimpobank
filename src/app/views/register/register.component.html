@@ -1,7 +1,7 @@
 
-<div class="screen-view" *ngIf="welcomeScreen">
-  <div class="view-container">
+<div class="screen-form alingToCenter" *ngIf="welcomeScreen">
     <h1>Bienvenido</h1>
+    <h5 class="emphasis">Ahora formas parte de la familia Olimpica</h5>
 
     <div *ngIf="credentials">
       <h4>{{ credentials.name }} {{ credentials.lastName }}</h4>
@@ -9,81 +9,34 @@
       <h3>Numero de cliente: <b>{{ credentials.client }}</b></h3>
     </div>
 
-    <p>Ahora formas parte de la familia Olimpica</p>
-
-    <button class="btn btn-primary " (click)="gotoDashboard()">Ir a Dashboard</button>
-  </div>
+    <button app-button class="big" (click)="gotoDashboard()">Ir a Dashboard</button>
 </div>
 
-<div class="screen-view" *ngIf="!welcomeScreen">
-  <div class="needs-validation view-container" id="register">
-    <div class="row g-3">
-
-      <div class="col-12">
-        <label for="email" class="form-label">Correo electronico</label>
-        <div class="input-group has-validation">
-          <input type="email" class="form-control" id="email" placeholder="email" required="">
-        <div class="invalid-feedback">
-            Your email is required.
-          </div>
-        </div>
-      </div>
-      
-      <div class="col-sm-6">
-        <label for="name" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="name" placeholder="" value="" required="">
-        <div class="invalid-feedback">
-          Valid first name is required.
-        </div>
-      </div>
-
-      <div class="col-sm-6">
-        <label for="lastName" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="lastName" placeholder="" value="" required="">
-        <div class="invalid-feedback">
-          Valid last last name is required.
-        </div>
-      </div>
-
-      <div class="col-12">
-        <label for="password" class="form-label">Constraseña</label>
-        <input type="password" class="form-control" id="password" required="">
-        <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
-        </div>
-      </div>
-
-      
-      <div class="col-12">
-        <span>Seguridad</span>
-      </div>
-
-      <div class="col-12">
-        <label for="passwordConfirmation" class="form-label">Confirmar Constraseña</label>
-        <input type="password" class="form-control" id="passwordConfirmation" required="">
-        <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
-        </div>
-      </div>
+<div class="screen-form alingToCenter" *ngIf="!welcomeScreen">
+  <h1>¿Eres nuevo por aqui?</h1>
+  <h5 class="emphasis">Cuentanos un poco de ti, completa el formulario</h5>
 
 
-      <div class="col-12">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="terms" required="">
-          <label class="form-check-label" for="same-address">Acepto los, <button class="link" (click)="gotoTerms()">Terminos y Condiciones</button>, 
-            consulte nuestro <button class="link" (click)="gotoPrivacy()">Aviso de privacidad.</button></label>
-        </div>
-      </div>
+  <div class="form" id="register">
+    <app-input [id]="'name'" [title]="'Nombre'" [required]="true"></app-input>
+    <app-input [id]="'lastName'" [title]="'Apellido'" [required]="true"></app-input>
+    <app-input [id]="'email'" [title]="'Correo electronico'" [required]="true"></app-input>
+    <app-input [id]="'password'" [title]="'Constraseña'" [required]="true"></app-input>
+    <app-input [id]="'passwordConfirmation'" [title]="'Confirmar Constraseña'" [required]="true"></app-input>
 
-      <div class="col-12" *ngIf="responseMessage">
-        <span>{{ responseMessage }}</span>
-      </div>
+    <app-checkbox [id]="'terms'" [title]="'He leido y acepto las condiciones y terminos.'"></app-checkbox>
+    <div class="link" (click)="gotoTerms()">Terminos y Condiciones</div>
+    <div class="link" (click)="gotoPrivacy()">Aviso de privacidad.</div>
 
-      <div class="col-12">
-        <button class="btn btn-primary btn-lg" *ngIf="restorePassword" (click)="gotoRestore()">Reestablecer contraseña</button>
-        <button class="btn btn-primary btn-lg" (click)="register()">Registrarse</button>
-      </div>
-
+    <div class="col-12" *ngIf="responseMessage">
+      <span>{{ responseMessage }}</span>
     </div>
-  </div> 
+
+    <div class="col-12">
+      <button app-button class="big" *ngIf="restorePassword" (click)="gotoRestore()">Reestablecer contraseña</button>
+      <button app-button class="big" (click)="register()">Registrarse</button>
+    </div>
+
+  </div>
+
 </div>

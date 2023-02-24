@@ -23,6 +23,13 @@ export class GlobalConstants {
         console.log('USESSION: ', USESSION);
     }
 
+    headerOptions = {
+        return: { show: false, route: '' },
+        profile: { show: false },
+        title: { show: false, content: '' },
+        lateralMenu: { show: false },
+    }
+
     constructor() {}
 
     reset() {

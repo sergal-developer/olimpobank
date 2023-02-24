@@ -21,8 +21,8 @@ export class CardRequestComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.configHeader();
     this._activatedRoute.params.subscribe(params => {
-      console.log('type: ', params);
       if (params.type) {
         this.type = params.type;
         this.getCards(this.type);
@@ -44,7 +44,17 @@ export class CardRequestComponent implements OnInit {
   }
 
   goDashboard() {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/app']);
   }
 
+  configHeader() {
+    setTimeout(() => {
+      this.gc.headerOptions.return.show = true;
+      this.gc.headerOptions.return.route = '/app';
+      this.gc.headerOptions.profile.show = false;
+      this.gc.headerOptions.title.show = true;
+      this.gc.headerOptions.title.content = `Solicitar Tarjeta ${ this.type === 'debit' ? 'Debito': 'Credito' }`;
+      this.gc.headerOptions.lateralMenu.show = false;
+    }, 200);
+  }
 }

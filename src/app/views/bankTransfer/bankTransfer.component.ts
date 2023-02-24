@@ -23,6 +23,7 @@ export class BankTransferComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.configHeader();
     this._activatedRoute.params.subscribe(params => {
       console.log('params: ', params);
       if (params.id) {
@@ -69,4 +70,14 @@ export class BankTransferComponent implements OnInit {
 
   }
 
+  configHeader() {
+    setTimeout(() => {
+      this.gc.headerOptions.return.show = true;
+      this.gc.headerOptions.return.route = `/app/card/${ this.cardId }`;
+      this.gc.headerOptions.profile.show = false;
+      this.gc.headerOptions.title.show = true;
+      this.gc.headerOptions.title.content = `${ this.operation === 'transfer' ? 'Enviar Dinero' : 'Pagar' }`;
+      this.gc.headerOptions.lateralMenu.show = false;
+    }, 200);
+  }
 }

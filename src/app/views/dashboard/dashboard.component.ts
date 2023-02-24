@@ -18,6 +18,7 @@ export class DashboardComponent {
     private gc: GlobalConstants) { }
 
   ngOnInit(): void {
+    this.configHeader();
     this.getUser();
   }
 
@@ -32,27 +33,26 @@ export class DashboardComponent {
   }
 
   requestCard(type: string) {
-    this.router.navigate(['/request', type]);
+    this.router.navigate(['/app/request', type]);
   }
 
   detailsCard(card: any) {
-    this.router.navigate(['/card', card.id]);
-  }
-
-  goProfile() {
-    this.router.navigate(['/profile']);
-  }
-
-  goNotifications() {
-    this.router.navigate(['/notification']);
-  }
-
-  goHelp() {
-    this.router.navigate(['/help']);
+    this.router.navigate(['/app/card', card.id]);
   }
 
   getProfile() {
     this.user = this.service.getProfile(this.user);
+  }
+
+  configHeader() {
+    setTimeout(() => {
+      this.gc.headerOptions.return.show = false;
+      this.gc.headerOptions.return.route = '/app';
+      this.gc.headerOptions.profile.show = true;
+      this.gc.headerOptions.title.show = false;
+      this.gc.headerOptions.title.content = '';
+      this.gc.headerOptions.lateralMenu.show = true;
+    }, 200);
   }
 
 }

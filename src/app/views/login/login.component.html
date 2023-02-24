@@ -1,44 +1,24 @@
-<div class="screen-view">
-  <div class="needs-validation view-container" id="login">
-    <div class="row g-3">
+<div id="login" class="screen-form alingToCenter">
+  <h1>Bienvenido!</h1>
+  <h5 class="emphasis">La mejor banca en linea del pais.</h5>
 
-      <div class="col-12">
-        <label for="user" class="form-label">Usuario / Cliente</label>
+  <div class="form">
+    <app-input [id]="'user'" [title]="'Usuario / Cliente'"></app-input>
+    <app-input [id]="'password'" [title]="'Password'"></app-input>
 
-        <div class="input-group has-validation">
-          <input type="text" class="form-control" id="user" required="">
-          <div class="invalid-feedback">
-            Your user is required.
-          </div>
-        </div>
-      </div>
+    <div class="col-12">
+      <span><button app-button class="link" (click)="gotoReset()">No recuerdo mi contraseña</button></span>
+    </div>
 
-      <div class="col-12">
-        <label for="password" class="form-label">Constraseña</label>
+    <div class="col-12" *ngIf="responseMessage">
+      <span>{{ responseMessage }}</span>
+    </div>
 
-        <input type="password" class="form-control" id="password" required="">
-        <div class="invalid-feedback">
-          Please enter a valid email address for shipping updates.
-        </div>
-      </div>
+    <div class="col-12">
+      <button app-button class="big" (click)="login()">Acceder</button>
+    </div>
 
-      <div class="col-12" *ngIf="responseMessage">
-        <span>{{ responseMessage }}</span>
-      </div>
-
-      <div class="col-12">
-        <span><button class="link" (click)="gotoReset()">No recuerdo mi contraseña</button></span>
-      </div>
-
-      <div class="col-12">
-        <button class="btn btn-primary btn-lg" (click)="login()">Acceder</button>
-      </div>
-
-      <div class="col-12">
-        <span>¿Eres nuevo por aqui?, <button class="link" (click)="gotoRegister()">Registrate</button> </span>
-      </div>
-
+    <div class="col-12">
+      <span>¿Eres nuevo por aqui?, <button app-button class="link" (click)="gotoRegister()">Registrate</button> </span>
     </div>
   </div>
-
-</div>

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RegisterComponent } from './register.component';
+import { UXComponent } from './UX.component';
 import { ComponentsModule } from 'src/app/common/components/components.module';
 
 @NgModule({
@@ -8,7 +8,7 @@ import { ComponentsModule } from 'src/app/common/components/components.module';
     CommonModule,
     ComponentsModule
   ],
-  exports: [ RegisterComponent ],
-  declarations: [RegisterComponent]
+  exports: [UXComponent],
+  declarations: [UXComponent]
 })
-export class RegisterModule { }
+export class UXModule { }
