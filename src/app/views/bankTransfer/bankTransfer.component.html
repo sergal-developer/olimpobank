@@ -1,51 +1,26 @@
 <div class="content">
-  <div class="needs-validation" id="transfer">
-    <div class="row g-3">
+  <div class="screen-form alingToCenter" id="transfer">
+    <h1>{{ card.name }}</h1>
+    <h3 class="emphasis">{{ card.cardNumber }}</h3>
+    <h4 class="link amount">${{ card.balance }} {{ card.currency }}</h4>
+    <hr class="my-4">
 
-      <div class="col-12">
-        <div>{{ card.name }}</div>
-        <div>{{ card.cardNumber }}</div>
-        <div class="card-balance-total">
-          <div>${{ card.balance }} {{ card.currency }}</div>
-        </div>
-      </div>
+    <div class="form">
+      <h5>¿A quien envias?</h5>
+      <app-input [id]="'account'" [title]="'Telefono / Numero Tarjeta / CLABE'" [required]="true"></app-input>
+      <h5>¿Cuánto quieres enviar?</h5>
+      <app-input [id]="'amount'" [title]="'Monto'" [required]="true"></app-input>
 
-
-      <div class="col-12">
-        <label for="account" class="form-label">¿A quien envias?</label>
-        <div class="input-group has-validation">
-          <input type="text" class="form-control" id="account" placeholder="Telefono / Numero Tarjeta / CLABE"
-            required="">
-          <div class="invalid-feedback">
-            Your account is required.
-          </div>
-        </div>
-      </div>
-
-      <div class="col-12">
-        <label for="amount" class="form-label">¿Cuánto quieres enviar?</label>
-        <input type="number" class="form-control" id="amount" placeholder="0" required="">
-        <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
-        </div>
-      </div>
-
-      <div class="col-12">
-        <label for="concept" class="form-label">Concepto</label>
-        <input type="text" class="form-control" id="concept" placeholder="detalles">
-        <div class="invalid-feedback">
-          Please enter a valid text address for shipping updates.
-        </div>
-      </div>
+      <app-input [id]="'concept'" [title]="'Concepto'" [required]="true"></app-input>
 
       <div class="col-12" *ngIf="responseMessage">
         <span>{{ responseMessage }}</span>
       </div>
 
+      <br>
 
-      <hr class="my-4">
-
-      <button class="btn btn-primary btn-lg" (click)="send()">Enviar</button>
+      <button app-button class="big" (click)="send()">Enviar</button>
     </div>
   </div>
+
 </div>

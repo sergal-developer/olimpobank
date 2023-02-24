@@ -60,15 +60,6 @@ export class PanelComponent implements OnInit {
     onKeydownHandler(evt: KeyboardEvent) {
       this.close();
     }
-
-  // updateFixBody() {
-  //   const body = document.querySelectorAll('body');
-  //   if ( this.open ) {
-  //       body[0].classList.add('fix-modal-body');
-  //   } else {
-  //       body[0].classList.remove('fix-modal-body');
-  //   }
-  // }
   //#endregion
 
   //#region CONVERTERS

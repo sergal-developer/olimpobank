@@ -32,35 +32,47 @@ export class OlimpoService {
         ];
     }
 
-    getCards(type: string) {
+    getCards(type?: string) {
         const cards = [
             {
-                id: 111, name: "Debit", description: "Debito", type: 'debit',
-                commission: 0, annuity: 0, maxAmount: 0, cashback: 0, digital: false
+                id: 111, name: "Débito", description: "Tarjeta de débito básica", type: 'debit',
+                commission: 0, annuity: 0, maxAmount: 0, cashback: 0, digital: false,
+                front: '../../../assets/front-debito.svg',
+                back: '../../../assets/back-debito.svg'
             },
             {
-                id: 112, name: "Debit Atlant", description: "Debito Atlante", type: 'debit',
-                commission: 0, annuity: 300, maxAmount: 0, cashback: 0.03, digital: true
+                id: 112, name: "Débito Atlante", description: "Tarjeta de débito empresarial", type: 'debit',
+                commission: 0, annuity: 300, maxAmount: 0, cashback: 0.03, digital: true,
+                front: '../../../assets/front-debito-atlante.svg',
+                back: '../../../assets/back-debito-atlante.svg'
             },
             {
-                id: 113, name: "Debit Hiperion", description: "Debito Hiperion", type: 'debit',
-                commission: 0, annuity: 1000, maxAmount: 0, cashback: 0.10, digital: true
+                id: 113, name: "Débito Hiperión", description: "Tarjeta de débito exclusiva", type: 'debit',
+                commission: 0, annuity: 1000, maxAmount: 0, cashback: 0.10, digital: true,
+                front: '../../../assets/front-debito-hiperion.svg',
+                back: '../../../assets/back-debito-hiperion.svg'
             },
             {
-                id: 211, name: "Hermes", description: "Hermes", type: 'credit',
-                commission: 0, annuity: 900, maxAmount: 20000, cashback: 0, digital: true, bankInterest: 0.2
+                id: 211, name: "Hermes", description: "Tarjeta de crédito básica", type: 'credit',
+                commission: 0, annuity: 900, maxAmount: 20000, cashback: 0, digital: true, bankInterest: 0.2,
+                front: '../../../assets/front-credito-hermes.svg',
+                back: '../../../assets/front-credito-hermes.svg'
             },
             {
-                id: 212, name: "Apollo", description: "Apolo", type: 'credit',
-                commission: 0, annuity: 1500, maxAmount: 100000, cashback: 0.03, digital: true, bankInterest: 0.2
+                id: 212, name: "Apollo", description: "Tarjeta de crédito empresarial", type: 'credit',
+                commission: 0, annuity: 1500, maxAmount: 100000, cashback: 0.03, digital: true, bankInterest: 0.2,
+                front: '../../../assets/front-credito-apollo.svg',
+                back: '../../../assets/front-credito-apollo.svg'
             },
             {
-                id: 213, name: "Zeus", description: "Zeus", type: 'credit',
-                commission: 0, annuity: 3000, maxAmount: 600000, cashback: 0.10, digital: true, bankInterest: 0.2
+                id: 213, name: "Zeus", description: "Tarjeta de crédito exclusiva e ilimitada", type: 'credit',
+                commission: 0, annuity: 3000, maxAmount: ' Sin Limite', cashback: 0.10, digital: true, bankInterest: 0.2,
+                front: '../../../assets/front-credito-zeus.svg',
+                back: '../../../assets/front-credito-zeus.svg'
             },
         ];
 
-        return cards.filter(x => x.type === type);
+        return type ? cards.filter(x => x.type === type) : cards;
     }
 
     loginClient(credentials: any) {
@@ -124,6 +136,7 @@ export class OlimpoService {
             let user = this.getProfile(client);
             const requestCard = {
                 description: card.description,
+                name: card.name,
                 currency: user.profile.currency,
                 owner: `${user.name} ${user.lastName}`,
                 ownerId: user.id,
@@ -132,7 +145,8 @@ export class OlimpoService {
                 annuity: card.annuity,
                 maxAmount: card.maxAmount,
                 cashback: card.cashback,
-                digital: card.digital
+                digital: card.digital,
+                referenceCard: card.id
             };
             const newCard = this.oc.createCard(requestCard);
 
@@ -142,10 +156,12 @@ export class OlimpoService {
                     id: newCard.id,
                     account: newCard.account,
                     name: newCard.name,
+                    description: newCard.description,
                     balance: newCard.balance,
                     currency: newCard.currency,
                     active: newCard.active,
                     turnedOn: newCard.turnedOn,
+                    cardNumber: newCard.cardNumber
                 };
                 user.profile.accounts[card.type].push(linkCard);
                 this.updateClient(user);

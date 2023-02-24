@@ -271,7 +271,9 @@ export class OlimpoCore {
         const card = {
             id: this.uuidv4(),
             account: this.createPattern('xxxxxx'),
-            name: data.description,
+            name: data.name,
+            description: data.description,
+            referenceCard: data.referenceCard,
             balance: 0,
             currency: data.currency,
             active: true,
@@ -372,18 +374,6 @@ export class OlimpoCore {
         }
 
         console.log('card: ', card);
-        // const linkCard = client.profile.accounts[card.type].filter((x: any) => x.id === card.id);
-        // let cardUpdated = null;
-        // if (linkCard.length) {
-        //     linkCard[0].balance = card.balance;
-
-        //     console.log('linkCard: ', linkCard);
-        //     console.log('card: ', card);
-        //     cardUpdated = this.updateCard(card);
-        //     const profile = this.updateClient(client);
-        //     console.log('profile: ', profile);
-        // }
-        // return cardUpdated;
     }
     //#endregion TRANSACTIONS
     //#endregion CARDS

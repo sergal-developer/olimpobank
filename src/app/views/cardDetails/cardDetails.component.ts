@@ -12,6 +12,8 @@ export class CardDetailsComponent implements OnInit {
 
   cardId: any = null;
   card: any = null;
+  showReferenceCard = false;
+  referenceCard: any = null;
 
   constructor(
     private router: Router,
@@ -33,6 +35,11 @@ export class CardDetailsComponent implements OnInit {
 
   getCard(cardId: string) {
     this.card = this.service.getCardDetails(cardId);
+
+    const baseCards = this.service.getCards();
+    const referenceCard = baseCards.filter(x => x.id === this.card.referenceCard);
+    this.referenceCard = referenceCard.length ? referenceCard[0] : null;
+    console.log('this.referenceCard: ', this.referenceCard);
     console.log('this.cards: ', this.card);
   }
 
@@ -44,13 +51,21 @@ export class CardDetailsComponent implements OnInit {
     this.router.navigate(['/app/card', this.card.id, 'pay']);
   }
 
+  enableDisableCard() {}
+
+  createDigitalCard() {}
+
+  detailsCard() {
+    this.showReferenceCard = !this.showReferenceCard;
+  }
+
   configHeader() {
     setTimeout(() => {
       this.gc.headerOptions.return.show = true;
       this.gc.headerOptions.return.route = '/app';
       this.gc.headerOptions.profile.show = false;
       this.gc.headerOptions.title.show = true;
-      this.gc.headerOptions.title.content = `Tarjeta ${ this.card.cardNumber }`;
+      this.gc.headerOptions.title.content = `Tarjeta ${ this.card.name }`;
       this.gc.headerOptions.lateralMenu.show = false;
     }, 200);
   }

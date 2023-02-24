@@ -1,43 +1,81 @@
+<div class="content">
+  <div class="card-details-main">
 
-  <div class="content">
-    <div class="card-account">
-      <div class="card-details">
-        <div class="function">Apagar</div>
-        <div class="card">
-          <div>{{ card.name }}</div>
-          <div>{{ card.cardNumber }}</div>
-          <div>
-            <span>expire: {{ card.expirationMonth }}/{{ card.expirationYear }}/</span>
-            <span>CVC: {{ card.cvc }}</span>
-          </div>
-
-          <div>{{ card.owner }}</div>
+    <div class="card-details">
+      <div class="functionsCard">
+        <div class="buttonIcon" (click)="enableDisableCard()">
+          <i class="fa-solid fa-toggle-off"></i>
+          <span *ngIf="card.active">Apagar</span>
+          <span *ngIf="!card.active">Prender</span>
         </div>
-        <div class="function">Tarjeta Digital</div>
-      </div>
-      <div class="card-balance-total">
-        <div>${{ card.balance }} {{ card.currency }}</div>
       </div>
 
+      <div class="accountCard {{ card.name }} full" (click)="detailsCard()">
+        <div class="card-resume">
+          <div *ngIf="referenceCard" class="referenceCard" [ngClass]="{'showCard': showReferenceCard }">
+            <img [attr.src]="referenceCard.front" alt="">
 
-      <div class="card-operations">
-        <button (click)="transfer()">Enviar</button>
-        <button (click)="payments()">Pagar</button>
-      </div>
+            <div class="referenceCardInner">
+              <div class="card-header">
+                <div class="card-header-name">
+                  <h3>{{ card.name }}</h3>
+                  <h5 class="emphasis">{{ card.cardNumber }}</h5>
+                </div>
+                <div class="card-header-status">
+                  <div class="label-status">
+                    <span *ngIf="card.active">ACTIVA</span>
+                    <span *ngIf="!card.active">INACTIVA</span>
+                  </div>
+                </div>
+              </div>
 
-
-      <h5>Transacciones</h5>
-      <div class="card-history">
-        <div class="information">
-          <div class="info-list" >
-            <div class="info-item" *ngFor="let item of card.transactions">
-              <div>{{ item.date }}</div>
-              <div>{{ item.income }}</div>
-              <div>{{ item.emiter }}</div>
-              <div>${{ item.amount }} {{ item.currency }}</div>
+              <div class="expire">
+                <div>VALIDA HASTA</div>
+                <div class="value">{{ card.expirationMonth }}/{{ card.expirationYear }}</div>
+              </div>
+              <div class="CVC">
+                <div>CVC</div>
+                <div class="value">{{ card.cvc }}</div>
+              </div>
+              <div class="owner">{{ card.owner }}</div>
             </div>
+            
+
           </div>
+          
         </div>
+
+        
+      </div>
+
+
+      <div class="functionsCard">
+        <div class="buttonIcon" (click)="createDigitalCard()" >
+          <i class="fa-regular fa-credit-card"></i>
+          <span >Tarjeta Digital</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="card-balance-total">
+      <div>${{ card.balance }} {{ card.currency }}</div>
+    </div>
+
+
+    <div class="card-operations">
+      <button app-button class="link" (click)="transfer()">Enviar</button>
+      <button app-button class="link" (click)="payments()">Pagar</button>
+    </div>
+
+
+    <h2>Transacciones</h2>
+    <hr class="my-4">
+    <div class="card-transactions">
+      <div class="transaction" *ngFor="let item of card.transactions" [ngClass]="{'income': item.income, 'budget': !item.income}">
+        <div>{{ item.date }}</div>
+        <div>{{ item.concept }}</div>
+        <div>${{ item.amount }} {{ item.currency }}</div>
       </div>
     </div>
   </div>
+</div>

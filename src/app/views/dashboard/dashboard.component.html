@@ -8,25 +8,32 @@
           <button app-button class="circular"><i class="fa-solid fa-plus"></i></button>
         </div>
       </div>
+      
     </div>
 
     <div class="accountsList">
+    
       <div class="accountRequest" (click)="requestCard('debit')" *ngIf="!user.profile.accounts.debit.length">
         <button app-button class="circular"><i class="fa-solid fa-plus"></i></button>
         <div class="link">Solicitar tarjeta</div>
       </div>
 
-      <div class="accountCard" *ngFor="let account of user.profile.accounts.debit">
-        <div class="card-small" (click)="detailsCard(account)">
+      <div class="accountCard {{ account.name }}" *ngFor="let account of user.profile.accounts.debit">
+        <div class="card-resume" (click)="detailsCard(account)">
           <div class="card-header">
-            <div class="card name">{{ account.name }}</div>
-            <div class="card status">
-              <span *ngIf="account.active">ACTIVE</span>
-              <span *ngIf="!account.active">INACTIVE</span>
+            <div class="card-header-name">
+              <h3>{{ account.name }}</h3>
+              <h5 class="emphasis">{{ account.cardNumber }}</h5>
+            </div>
+            <div class="card-header-status">
+              <div class="label-status">
+                <span *ngIf="account.active">ACTIVE</span>
+                <span *ngIf="!account.active">INACTIVE</span>
+              </div>
             </div>
           </div>
           <div class="card-content">
-            <div class="card balance">${{ account.balance }} {{ account.currency }}</div>
+            <div class="card-content-balance">${{ account.balance }} {{ account.currency }}</div>
           </div>
         </div>
       </div>
@@ -43,25 +50,32 @@
           <button app-button class="circular"><i class="fa-solid fa-plus"></i></button>
         </div>
       </div>
+    
     </div>
 
     <div class="accountsList">
+
       <div class="accountRequest" (click)="requestCard('credit')" *ngIf="!user.profile.accounts.credit.length">
         <button app-button class="circular"><i class="fa-solid fa-plus"></i></button>
         <div class="link">Solicitar tarjeta</div>
       </div>
 
-      <div class="accountCard" *ngFor="let account of user.profile.accounts.credit">
-        <div class="card-small" (click)="detailsCard(account)">
+      <div class="accountCard {{ account.name }}" *ngFor="let account of user.profile.accounts.credit">
+        <div class="card-resume" (click)="detailsCard(account)">
           <div class="card-header">
-            <div class="card name">{{ account.name }}</div>
-            <div class="card status">
-              <span *ngIf="account.active">ACTIVE</span>
-              <span *ngIf="!account.active">INACTIVE</span>
+            <div class="card-header-name">
+              <h3>{{ account.name }}</h3>
+              <h5 class="emphasis">{{ account.cardNumber }}</h5>
+            </div>
+            <div class="card-header-status">
+              <div class="label-status">
+                <span *ngIf="account.active">ACTIVE</span>
+                <span *ngIf="!account.active">INACTIVE</span>
+              </div>
             </div>
           </div>
           <div class="card-content">
-            <div class="card balance">${{ account.balance }} {{ account.currency }}</div>
+            <div class="card-content-balance">${{ account.balance }} {{ account.currency }}</div>
           </div>
         </div>
       </div>

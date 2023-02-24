@@ -1,4 +1,5 @@
 @import 'core/colors';
+@import 'core/typography';
 
 .page {
     padding: 30px;
@@ -11,9 +12,7 @@
 
     width: 100vw;
     height: 100vh;
-    // background-color: rgb(239, 239, 239);
-    // border: 1px solid #333;
-    
+
     display: flex;
     flex-direction: column;
 
@@ -37,9 +36,7 @@
     padding: 0 30px;
     font-size: 12pt;
 
-    .return {
-        
-    }
+    .return {}
 }
 
 .screen-view-content {
@@ -82,51 +79,234 @@
     .accountsTitle {
         padding: 10px 0;
         font-size: 10pt;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .accountsList {
         .accountRequest {
             display: flex;
-             padding: 20px 0;
-        }
+            padding: 20px 0;
+            align-items: center;
 
-        .accountCard {
-            margin: 0 0 10px 0;
-            .card-small {
-                background: rgb(191, 191, 191);
-                border-radius: 10px;
-                padding: 10px 10px;
-                .card {
-                    background: none;
-                    border: none;
-                    &.name {}
-                    &.status {
-                        font-size: 8pt;
-                        background: #04AE09 !important;
-                        border-radius: 10px;
-                        padding: 5px 5px 0px;
-                        text-transform: uppercase;
-                    }
-                    &.balance {
-                        font-size: 18pt;
-                    }
-                }
-
-                .card-header {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px 0;
-                }
-                .card-content {
-                    display: flex;
-                    justify-content: flex-end;
-                    padding: 10px 0;
-                }
-
+            button {
+                margin: 0;
+                margin-right: 15px;
             }
         }
     }
 
+}
+
+
+.accountCard {
+    margin: 0 0 10px 0;
+    cursor: pointer;
+
+    .card-resume {
+        background: #000000;
+        border-radius: 10px;
+        padding: 10px 10px;
+        box-shadow: 0 0 5px #2c2c2c;
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+
+            .card-header-name {
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
+                    padding: 0 0;
+                }
+            }
+
+            .card-header-status {
+                .label-status {
+                    font-size: 8pt;
+                    background: #04AE09 !important;
+                    color: white !important;
+                    border-radius: 5px;
+                    padding: 1px 5px;
+                    text-transform: uppercase;
+                }
+            }
+        }
+
+        .card-content {
+            display: flex;
+            justify-content: flex-end;
+
+            .card-content-balance {
+                font-size: 18pt;
+                @extend .monoFont;
+            }
+        }
+    }
+
+    &.Hermes {
+        .card-resume {
+            background: linear-gradient(190deg, rgba(62, 62, 62, 1) 0%, rgba(0, 0, 0, 1) 100%);
+        }
+    }
+
+    &.Apollo {
+        color: white;
+
+        .card-resume {
+            background: linear-gradient(50deg, rgb(34, 34, 34) 0%, rgba(87, 87, 87, 1) 100%);
+        }
+    }
+
+    &.Zeus {
+        color: black;
+
+        .card-resume {
+            background: linear-gradient(59deg, rgba(193, 176, 109, 1) 0%, rgba(237, 225, 190, 1) 48%, rgba(204, 188, 121, 1) 100%);
+        }
+    }
+
+    &.Débito {
+        .card-resume {
+            background: linear-gradient(190deg, rgba(62, 62, 62, 1) 0%, rgba(0, 0, 0, 1) 100%);
+        }
+    }
+
+    &.Débito.Atlante {
+        color: white;
+
+        .card-resume {
+            background: linear-gradient(50deg, rgb(34, 34, 34) 0%, rgba(87, 87, 87, 1) 100%);
+        }
+    }
+
+    &.Débito.Hiperión {
+        color: black;
+
+        .card-resume {
+            background: linear-gradient(59deg, rgba(193, 176, 109, 1) 0%, rgba(237, 225, 190, 1) 48%, rgba(204, 188, 121, 1) 100%);
+        }
+    }
+
+    &.full {
+        .card-resume {
+            background: none;
+            padding: 0;
+        }
+    }
+
+}
+
+.accountsList {
+    .accountCard {
+        transition: all 300ms;
+        margin-bottom: -17px;
+
+        &:hover {
+            margin: 0 0 10px 0;
+        }
+    }
+}
+
+.referenceCard {
+    height: 120px;
+    overflow: hidden;
+    transition: all 300ms;
+    position: relative;
+
+    .referenceCardInner {
+        transition: all 300ms;
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: inherit;
+        padding: 10px;
+
+        * {
+            transition: all 300ms;
+        }
+
+        .card-header-name {
+            margin-top: 50px;
+            transition: all 300ms;
+        }
+
+        .expire {
+            position: absolute;
+            line-height: 1;
+        }
+
+        .CVC {
+            position: absolute;
+            line-height: 1;
+        }
+
+        .owner {
+            right: 0;
+            position: absolute;
+            transform: rotate(270deg);
+            text-transform: uppercase;
+        }
+
+        .expire,
+        .CVC,
+        .owner {
+            top: 0;
+            opacity: 0;
+            font-size: 8pt;
+
+            .value {
+                font-size: 14pt;
+                font-weight: bold;
+            }
+        }
+
+    }
+
+    &.showCard {
+        height: 375px;
+
+        .card-header-name {
+            h3 {
+                font-size: 15px !important;
+                color: gray;
+            }
+
+            h5 {
+                font-size: 20px !important;
+            }
+
+            .emphasis {
+                color: white !important;
+            }
+        }
+
+        .expire {
+            top: 120px;
+        }
+
+        .CVC {
+            top: 170px;
+        }
+
+        .owner {
+            top: 200px;
+            right: -70px;
+            font-size: 20px;
+        }
+
+        .expire,
+        .CVC,
+        .owner {
+            opacity: 1;
+        }
+    }
 }
 
 .logo {
@@ -136,19 +316,164 @@
 }
 
 @keyframes fade {
-    
-    0%,25% {
-      opacity: 0;
+
+    0%,
+    25% {
+        opacity: 0;
     }
+
     50% {
         opacity: 0.5;
     }
+
     100% {
         opacity: 1;
     }
-    
-  }
+
+}
+
+.card-information {
+    position: relative;
+    width: 100%;
+    margin-bottom: 40px;
+
+    .card-characteristics {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        .card-preview {
+            width: 40%;
+
+            img {
+                width: auto;
+                height: inherit;
+            }
+        }
+
+        .card-preview-list {
+            width: 60%;
+            padding: 0 20px;
+        }
+    }
+}
+
+.card-details-main {
+
+    .card-details {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-direction: row;
+
+        .functionsCard {
+            width: 15%;
+            margin-top: 30px;
+
+            .buttonIcon {
+                cursor: pointer;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+
+                i {
+                    font-size: 18px;
+                    margin-bottom: 10px;
+                }
+
+                span {
+                    line-height: 1;
+                }
+            }
+
+        }
+    }
+
+    .card-balance-total {
+        display: flex;
+        font-size: 18pt;
+        justify-content: center;
+        @extend .monoFont;
+    }
+
+    .card-operations {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card-transactions {
+        .transaction {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-direction: row;
+            padding: 10px 0 10px 10px;
+            font-size: 11pt;
+            border-bottom: 1px solid #373737;
+
+            &:before {
+                content: "";
+                background: #b1b1b1;
+                height: 100%;
+                width: 5px;
+                position: absolute;
+                top: 0;
+                left: 0;
+            }
+
+            &.income {
+                &:before {
+                    background: #0bb55e;
+                }
+            }
+
+            &.budget {
+                &:before {
+                    background: #b91d1d;
+                }
+            }
+        }
+    }
+}
+
+
+.information-list {
+    width: 100%;
+    margin-bottom: 30px;
+
+    .information-group {
+        font-size: 9pt;
+        color: #9d9d9d;
+        text-transform: uppercase;
+    }
+
+    .information-group-content {
+        display: flex;
+        flex-direction: column;
+        align-content: space-between;
+        justify-content: center;
+        align-items: flex-start;
+
+        .item {
+            margin: 10px 0;
+            line-height: 1;
+        }
+
+        h3 {
+            padding: 0;
+            color: var(--secondaryColor);
+        }
+
+        h4 {
+            padding: 0;
+        }
+    }
+}
 
 // * * {
-//     outline: 1px solid rgb(242, 197, 242);
+//     outline: 1px solid rgba(242, 197, 242, 0.1);
 // }

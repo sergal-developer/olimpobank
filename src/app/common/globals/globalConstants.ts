@@ -20,7 +20,6 @@ export class GlobalConstants {
         user.expire = new Date().setHours(1);
         localStorage.setItem('USESSION', JSON.stringify(user));
         const USESSION = localStorage.getItem('USESSION');
-        console.log('USESSION: ', USESSION);
     }
 
     headerOptions = {

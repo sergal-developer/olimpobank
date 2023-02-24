@@ -149,22 +149,41 @@
     left: 0;
 }
 
+.gbx-panel-title {
+    color: black;
+}
+
 .menu-list {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     align-items: flex-start;
     justify-content: center;
+    color: black;
 
     .item {
         display: flex;
         height: 50px;
         align-items: center;
-        justify-content: flex-start;
-        flex-direction: column;
+        justify-content: center;
+        flex-direction: row;
         font-size: 12pt;
-
-        .icon {}
+        transition: all 300ms;
+        
+        cursor: pointer;
+        .icon {
+            font-size: 14pt;
+            padding-right: 10px;
+        }
         .text {}
+
+        &.bottom {
+            bottom: 0;
+            position: absolute;
+        }
+
+        &:hover {
+            color: #525252;
+        }
     }
 }

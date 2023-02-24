@@ -34,29 +34,25 @@
 
         <div class="menu-list">
             <div class="item" (click)="goProfile()">
-                <div class="icon"></div>
+                <div class="icon"><i class="fa-solid fa-address-card"></i></div>
                 <div class="text">Mi Perfil</div>
             </div>
 
             <div class="item" (click)="goNotifications()">
-                <div class="icon"></div>
+                <div class="icon"><i class="fa-regular fa-bell"></i></div>
                 <div class="text">Notificaciones</div>
             </div>
 
             <div class="item" (click)="goHelp()">
-                <div class="icon"></div>
+                <div class="icon"><i class="fa-solid fa-circle-question"></i></div>
                 <div class="text">Ayuda</div>
             </div>
 
-            <div class="item" (click)="closeSession()">
-                <div class="icon"></div>
+            <div class="item bottom" (click)="closeSession()">
+                <div class="icon"><i class="fa-solid fa-power-off"></i></div>
                 <div class="text">Cerrar Sessión</div>
             </div>
 
-            <div class="item">
-                <div class="icon"></div>
-                <div class="text">Ultimo Acceso</div>
-            </div>
         </div>
     </ng-container>
 </panel-component>

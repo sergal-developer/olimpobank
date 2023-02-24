@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GlobalConstants } from 'src/app/common/globals/globalConstants';
 import { OlimpoService } from 'src/app/common/services/olimpoServices';
 
@@ -17,6 +17,7 @@ export class BankTransferComponent implements OnInit {
   operation: string = '';
 
   constructor(
+    private router: Router,
     private _activatedRoute: ActivatedRoute,
     private service: OlimpoService,
     private gc: GlobalConstants
@@ -68,6 +69,12 @@ export class BankTransferComponent implements OnInit {
     const tra = this.service.transaction(transaction, this.card, this.gc.currentUser);
     console.log('tra: ', tra);
 
+    this.gotoCard();
+
+  }
+
+  gotoCard() {
+    this.router.navigate(['/app/card', this.cardId]);
   }
 
   configHeader() {

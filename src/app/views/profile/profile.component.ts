@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GlobalConstants } from 'src/app/common/globals/globalConstants';
+import { OlimpoService } from 'src/app/common/services/olimpoServices';
 
 @Component({
   selector: 'app-profile',
@@ -8,10 +9,20 @@ import { GlobalConstants } from 'src/app/common/globals/globalConstants';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(public gc: GlobalConstants) { }
+  user: any = null;
+
+  constructor(
+    public gc: GlobalConstants,
+    private service: OlimpoService) { }
 
   ngOnInit() {
     this.configHeader();
+    this.getProfile();
+  }
+
+  getProfile() {
+    this.user = this.gc.currentUser;
+    this.user = this.service.getProfile(this.user);
   }
 
   configHeader() {
