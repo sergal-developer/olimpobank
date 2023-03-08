@@ -1,9 +1,5 @@
-import { Injectable } from "@angular/core";
 import { OlimpoCore } from "./olimpoCore";
 
-@Injectable({
-    providedIn: 'root'
-})
 export class OlimpoService {
 
     constructor(private oc: OlimpoCore) { }

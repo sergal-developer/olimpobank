@@ -1,28 +1,27 @@
-import { CurrencyPipe, DatePipe } from '@angular/common';
 
 export class HelperTransform {
-    private _currencyPipe: CurrencyPipe;
-    private _datePipe: DatePipe;
+    // private _currencyPipe: CurrencyPipe;
+    // private _datePipe: DatePipe;
 
-    constructor() {
-        this._currencyPipe = new CurrencyPipe('en-US');
-        this._datePipe = new DatePipe('en-US');
-    }
+    // constructor() {
+    //     this._currencyPipe = new CurrencyPipe('en-US');
+    //     this._datePipe = new DatePipe('en-US');
+    // }
 
-    toDate(value: Date, format = 'MM/d/yyyy') {
-        const result = this._datePipe.transform(value, format);
-        return result;
-    }
+    // toDate(value: Date, format = 'MM/d/yyyy') {
+    //     const result = this._datePipe.transform(value, format);
+    //     return result;
+    // }
 
-    toDateUTC(value: Date, format = 'MM/d/yyyy') {
-        const result = this._datePipe.transform(value, format, 'UTC');
-        return result;
-    }
+    // toDateUTC(value: Date, format = 'MM/d/yyyy') {
+    //     const result = this._datePipe.transform(value, format, 'UTC');
+    //     return result;
+    // }
 
-    toMoney(value: number | string) {
-        const result = this._currencyPipe.transform(value);
-        return result;
-    }
+    // toMoney(value: number | string) {
+    //     const result = this._currencyPipe.transform(value);
+    //     return result;
+    // }
 
     milisecondsToDate(miliseconds: number) {
         try {

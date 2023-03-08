@@ -1,10 +1,7 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "src/app/database/session.storage";
+
+import { Storage } from "../../database/session.storage";
 import { GlobalConstants } from "../globals/globalConstants";
 
-@Injectable({
-    providedIn: 'root'
-})
 export class OlimpoCore {
     dataName = "DATA";
     db = new Storage();
