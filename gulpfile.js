@@ -5,8 +5,8 @@ const clean = require('gulp-clean');
 const config = {
   dest: './dist',
   sassFiles: './src/**/*.scss',
-  htmlFiles: './**/*.html',
-  assersFiles: './src/asserts/**/*',
+  htmlFiles: './src/**/*.html',
+  assersFiles: './src/assets/**/*',
   tsFiles: './src/**/*.ts',
 }
 
@@ -20,7 +20,7 @@ gulp.task('html', () => {
         .pipe(gulp.dest(config.dest));
 });
 
-gulp.task('asserts', () => {
+gulp.task('assets', () => {
   return gulp.src(config.assersFiles, { base: './src'})
         .pipe(gulp.dest(config.dest));
 });
@@ -37,9 +37,8 @@ gulp.task('watchers-dev', () => {
   return;
 });
 
-
 gulp.task('build', 
-  gulp.series('html', 'asserts', 'styles'));
+  gulp.series('html', 'assets', 'styles'));
 
 gulp.task('dev', 
   gulp.series('build'));

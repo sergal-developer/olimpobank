@@ -25,14 +25,22 @@ var base: any;
 @customElement('app-component')
 @router
 export class AppComponent extends LitElement {
+  
+  @property()
   navigation: any = {};
 
-  @property()
-  route: string  = '';
-  @property()
+  @property({ type: String })
+  route: string = '';
+
+  @property({ type: Object })
   params: any = {};
-  @property()
+
+  @property({ type: Object })
   query: any = {};
+
+  constructor() {
+    super();
+  }
 
   static mainRoutes = [
     { name: 'splash', pattern: '' },
@@ -71,7 +79,7 @@ export class AppComponent extends LitElement {
       data: data
     }
 
-    console.log(this.navigation);
+    console.log('navigation', this.navigation);
   }
 
   render() {
@@ -83,26 +91,27 @@ export class AppComponent extends LitElement {
       </ul>
 
       <route-outlet active-route=${this.route}>
-        <splash-view route='splash'></splash-view>
-        <login-view route='login'></login-view>
-        <register-view route='register'></register-view>
-        <reset-view route='reset'></reset-view>
+        ${ this.route === 'splash' ? html`<splash-view nav="${this.navigation}"></splash-view>` : html`` }
 
-        <dashboard-view route='app'></dashboard-view>
-        <profile-view route='app-profile'></profile-view>
-        <notification-view route='app-notification'></notification-view>
-        <help-view route='app-help'></help-view>
-        <request-type-view route='app-request-type'></request-type-view>
-        <card-view route='app-card'></card-view>
-        <card-operation-view route='app-card-operation'></card-operation-view>
+        ${ this.route === 'login' ? html`<login-view></login-view>` : html`` }
+        ${ this.route === 'register' ? html`<register-view></register-view>` : html`` }
+        ${ this.route === 'reset' ? html`<reset-view></reset-view>` : html`` }
 
-        <not-found-view route='not-found'></not-found-view>
+        ${ this.route === 'app' ? html`<dashboard-view></dashboard-view>` : html`` }
+        ${ this.route === 'app-profile' ? html`<profile-view></profile-view>` : html`` }
+        ${ this.route === 'app-notification' ? html`<notification-view></notification-view>` : html`` }
+        ${ this.route === 'app-help' ? html`<help-view></help-view>` : html`` }
+        ${ this.route === 'app-request-type' ? html`<request-type-view></request-type-view>` : html`` }
+        ${ this.route === 'app-card' ? html`<card-view></card-view>` : html`` }
+        ${ this.route === 'app-card-operation' ? html`<card-operation-view></card-operation-view>` : html`` }
 
-         <div>
+        ${ this.route === 'not-found' ? html`<not-found-view></not-found-view>` : html`` }
+
+         <!-- <div>
             <h1>${ JSON.stringify(this.route)}</h1>
             <span> ${ JSON.stringify(this.params)} </span> <br>
             <span> ${ JSON.stringify(this.query)} </span> <br>
-         </div>
+         </div> -->
 
       </route-outlet>
     `;

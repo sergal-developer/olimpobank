@@ -26,9 +26,6 @@ body {
     @extend .openSansFont;
     background: var(--background);
     color: var(--textColor);
-    
-    background: rgb(239, 239, 239);
-    color: black;
 
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

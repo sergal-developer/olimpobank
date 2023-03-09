@@ -7,7 +7,61 @@ export class ResetView extends LitElement {
   
   render() {
     return html`
-    <h1> reset </h1>
+    <ng-container *ngIf="!updatedPassword">
+      <div class="screen-form alingToCenter" *ngIf="client">
+        <h1>Reestablecer!</h1>
+          <!-- <h3>{{ client.name }} {{ client.lastName }}</h3> -->
+          <h3>{{ client.email }}</h3>
+          <h4 class="link">Cliente: {{ client.client }}</h4>
+          
+
+        <div class="form" id="resetPassword">
+          
+
+          <app-input [id]="'password'" [title]="'Contraseña'" [required]="true"></app-input>
+          <app-input [id]="'passwordConfirmation'" [title]="'Confirmar Contraseña'" [required]="true"></app-input>
+
+          <div class="col-12" *ngIf="responseMessage">
+            <span>{{ responseMessage }}</span>
+          </div>
+
+          <div class="col-12">
+            <button app-button class="big" (click)="updatePassword()">Actualizar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="screen-form alingToCenter" *ngIf="!client">
+        <h1>Reestablecer!</h1>
+          <h5 class="emphasis">¿que cuenta se va a reestablecer?</h5>
+
+
+        <div class="form" id="restore">
+          
+          <app-input [id]="'user'" [title]="'Usuario / Cuenta'" [required]="true"></app-input>
+
+          <div class="col-12" *ngIf="responseMessage">
+            <span>{{ responseMessage }}</span>
+          </div>
+
+          <div class="col-12">
+            <button app-button class="big" (click)="restore()">Recuperar</button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+
+
+    <div class="screen-form alingToCenter" *ngIf="updatedPassword">
+      <div class="form" id="restore">
+        <h1>Actualización Correcta</h1>
+        <h5 class="emphasis">El usuario se ha reestablecido con exito!!</h5>
+
+        <p>Sera redirigido al inicio en 5 seg
+        </p>
+        <p>Se requeria que se auntentique con su usuario y contraseña actualizada.</p>
+      </div>
+    </div>
     `;
   }
 }
